@@ -1,0 +1,9 @@
+<resources>
+    <!-- Common ICON Size -->
+    <!--图标尺寸-->
+    <dimen name="icon_size_small">25sp</dimen>
+    <dimen name="icon_size_middle">40sp</dimen>
+    <dimen name="icon_size_big">60sp</dimen>
+
+    <dimen name="icon_size_20">20sp</dimen>
+</resources>

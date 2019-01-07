@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--图标颜色-->
+    <color name="icon_color_gray">#666666</color>
+    <color name="icon_color_gray80P">#80666666</color>
+    <color name="icon_color_white">#ffffff</color>
+    <color name="icon_color_blue">#34B2D1</color>
+    <color name="icon_color_black">#333</color>
+    <color name="icon_color_blue80P">#8034B2D1</color>
+</resources>

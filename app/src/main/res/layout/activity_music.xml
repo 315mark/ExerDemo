@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/playMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="play" />
+    
+    <Button
+         android:id="@+id/stopMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stop" />
+    
+     <Button
+       android:id="@+id/pauseMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="pause" />
+     
+     <Button
+       android:id="@+id/exitMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关闭音乐服务" />
+
+</LinearLayout>

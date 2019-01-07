@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--图标String-->
+    <string name="icon_account">&#xe6a3;</string>
+    <string name="icon_add">&#xe6b9;</string>
+    <string name="icon_minus">&#xe6ba;</string>
+</resources>

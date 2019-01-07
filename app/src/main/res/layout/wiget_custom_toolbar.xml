@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_blue_2f94ae">
+
+    <RelativeLayout
+        android:id="@+id/rl_title_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:id="@+id/tv_left_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="{ion-ios-arrow-left}"
+            android:textColor="@color/icon_color_white"
+            android:textSize="@dimen/icon_size_small"/>
+
+
+        <TextView
+            android:id="@+id/tv_left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_left_icon"
+            android:text="返回"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/fontSize_16"/>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:ellipsize="middle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="@dimen/fontSize_16"
+        android:visibility="gone"
+        android:textColor="@color/font_white"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_title_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_right_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="{ion-ios-arrow-left}"
+            android:textColor="@color/icon_color_white"
+            android:textSize="@dimen/icon_size_small"/>
+
+
+        <TextView
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="返回"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/fontSize_16"
+            />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

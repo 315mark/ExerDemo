@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:onClick="startService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启动服务" />
+    
+    <Button
+        android:onClick="stopService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止服务" />
+    <Button
+        android:onClick="bindService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="绑定服务" />
+    <!--解綁操作放在Destory()方法-->
+    <Button
+        android:onClick="unbindService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="解绑服务" />
+    
+    <Button
+        android:onClick="endCall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="调用系统服务挂断电话" />
+    
+    <Button
+        android:onClick="startPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试黑名单拦截(调用系统服务)" />
+    
+    <Button
+        android:onClick="startMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="音乐播放测试" />
+
+</LinearLayout>

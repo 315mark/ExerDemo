@@ -6,17 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import zkch.com.exerdemo.widget.statuslayout.StatusLayoutManager;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import zkch.com.exerdemo.R;
-import zkch.com.exerdemo.widget.statuslayout.OnRetryListener;
-import zkch.com.exerdemo.widget.statuslayout.OnShowHideViewListener;
 /**
  * 应用级BaseFragment
- * Created by chenweisong on 2017/9/6.
  */
 
+/*
 public abstract class AppBaseFragment extends BaseFragment {
 
     protected StatusLayoutManager statusLayoutManager;
@@ -26,8 +20,8 @@ public abstract class AppBaseFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_app_base, container, false);
-        viewContent = (FrameLayout) view.findViewById(R.id.view_content);
+        View view = inflater.inflate(null, container, false);
+       // viewContent = (FrameLayout) view.findViewById(R.id.view_content);
 
         initStatusLayout();
         unbinder = ButterKnife.bind(this, view);
@@ -36,17 +30,21 @@ public abstract class AppBaseFragment extends BaseFragment {
     }
 
 
-    /**
+    */
+/**
      * 获取布局layout
      *
      * @return
-     */
+     *//*
+
     protected abstract int getViewLayout();
 
 
-    /**
+    */
+/**
      * 初始化多状态布局
-     */
+     *//*
+
     private void initStatusLayout() {
         statusLayoutManager = StatusLayoutManager.newBuilder(getActivity())
                 .contentView(getViewLayout())
@@ -85,14 +83,18 @@ public abstract class AppBaseFragment extends BaseFragment {
 
     }
 
-    /**
+    */
+/**
      * View初始化
-     */
+     *//*
+
     protected abstract void initView();
 
-    /**
+    */
+/**
      * 数据加载
-     */
+     *//*
+
     protected abstract void loadData();
 
 
@@ -104,3 +106,4 @@ public abstract class AppBaseFragment extends BaseFragment {
         }
     }
 }
+*/

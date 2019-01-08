@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 /**自定义字体图标库
- * Created by Administrator on 2017/10/30.
  * 阿里图标库  或者选择github 第三方图标库
  */
 

@@ -11,6 +11,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true//解决65536问题
     }
+
+    compileOptions {
+        // bulid 项目异常须加这段
+        //异常信息  Invoke-customs are only supported starting with Android O (--min-api 26)
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,4 +47,30 @@ dependencies {
     //图标库
     implementation 'com.mikepenz:iconics-core:2.5.11@aar'
     implementation 'com.mikepenz:fontawesome-typeface:4.6.0.1@aar'
+
+    //rxjava  retrofit2  okhttp3
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+    implementation 'com.google.dagger:dagger:2.0.2'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
+
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.0"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.2"
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'com.hwangjr.rxbus:rxbus:1.0.5'
+
+    //权限  图片 框架
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //recyleView
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //自定义View
+    implementation 'com.eftimoff:android-pathview:1.0.8@aar'
+
 }

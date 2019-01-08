@@ -1,21 +1,41 @@
 package zkch.com.exerdemo.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
+import butterknife.Unbinder;
 
 /**BaseFragment
- * Created by chenweisong on 2017/9/6.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
-    protected FragmentActivity activity;
+   protected View rootView;
+    Unbinder bind;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        rootView = inflater.inflate(getLayoutResID(), container, false);
+        bind = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    public abstract int getLayoutResID();
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
+    public void onDestroy() {
+        super.onDestroy();
+
+        bind.unbind();
     }
+
 }

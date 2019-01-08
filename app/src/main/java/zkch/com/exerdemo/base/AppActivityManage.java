@@ -9,7 +9,6 @@ import java.util.Stack;
 
 /**
  * 应用Activity管理
- * Created by chenweisong on 2017/10/23.
  */
 
 public class AppActivityManage {

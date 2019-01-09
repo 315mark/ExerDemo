@@ -17,7 +17,7 @@ import java.util.LinkedList;
  */
 
 public class AliFont implements ITypeface {
-    private static final String TTF_FILE = "iconfont_1.ttf";
+    private static final String TTF_FILE = "iconfont.ttf";
     private static Typeface typeface = null;
     private static HashMap<String, Character> mChars;
 
@@ -40,12 +40,12 @@ public class AliFont implements ITypeface {
 
     @Override
     public String getMappingPrefix() {
-        return "ali";
+        return "cniao";
     }
 
     @Override
     public String getFontName() {
-        return "AliFont";
+        return "cniao";
     }
 
     @Override
@@ -69,12 +69,12 @@ public class AliFont implements ITypeface {
 
     @Override
     public String getAuthor() {
-        return "cvsong";
+        return "www.cniao5.com";
     }
 
     @Override
     public String getUrl() {
-        return "http://alifont.com/";
+        return "http://wwww.cniao5.com/";
     }
 
     @Override
@@ -89,7 +89,7 @@ public class AliFont implements ITypeface {
 
     @Override
     public String getLicenseUrl() {
-        return "https://github.com/driftyco/ionicons/blob/master/LICENSE";
+        return "http://wwww.cniao5.com/";
     }
 
     @Override
@@ -105,8 +105,9 @@ public class AliFont implements ITypeface {
     }
 
     public enum Icon implements IIcon {
-        ali_setting('\ue639'),
-        ali_close('\ue69a');
+        cniao_download('\ue600'),
+        cniao_head('\ue61b'),
+        cniao_shutdown('\ue68e');
 
         char character;
 

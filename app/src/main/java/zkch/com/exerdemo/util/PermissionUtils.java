@@ -1,5 +1,6 @@
 package zkch.com.exerdemo.util;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +9,13 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.tbruyelle.rxpermissions.RxPermissions;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * <pre>
@@ -20,6 +26,44 @@ import java.util.List;
  * </pre>
  */
 public final class PermissionUtils {
+
+
+    public static void readPhonestate(Activity activity){
+
+        requestPermisson(activity, Manifest.permission.READ_PHONE_STATE).subscribe(new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+
+            }
+        });
+    }
+
+
+    public static Observable<Boolean> requestPermisson(Activity activity, String permission){
+
+        RxPermissions rxPermissions = new RxPermissions(activity);
+
+        return rxPermissions.request(permission);
+    }
+
+    public static Observable.Transformer<Object, Boolean> ensure(Activity activity, String permission){
+
+        RxPermissions rxPermissions = new RxPermissions(activity);
+
+        return  rxPermissions.ensure(permission);
+
+    }
+
 
     private static int mRequestCode = -1;
 

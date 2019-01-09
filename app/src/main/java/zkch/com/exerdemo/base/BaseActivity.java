@@ -13,6 +13,8 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.presenter.BasePresenter;
@@ -21,10 +23,11 @@ import zkch.com.exerdemo.util.KeyboardUtils;
 
 
 /**
- * 基础Activity
+ *  基础Activity   封装RxBinding
+ *  实例化的Disposable需在不用时及时销毁
  */
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
-
+    public CompositeDisposable mCompositeDisposable;
     protected AppApplication mApp;
     private Unbinder bind;
 
@@ -42,6 +45,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         mApp= (AppApplication) getApplication();
         //组件依赖注入全局级别的Application component
         setupActivityComponent(mApp.getAppComponent());
+        //进行RxBinding 绑定
+        mCompositeDisposable = new CompositeDisposable();
         init();
     }
 
@@ -52,10 +57,30 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        clearDisposable();
         if (bind != Unbinder.EMPTY) {
             bind.unbind();//解除绑定
         }
 
+    }
+
+    /**
+     * 添加订阅
+     */
+    public void addDisposable(Disposable mDisposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(mDisposable);
+    }
+
+    /**
+     * 取消所有订阅
+     */
+    public void clearDisposable() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
     }
 
     /**

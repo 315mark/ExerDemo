@@ -3,7 +3,8 @@ package zkch.com.exerdemo.mvp.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import zkch.com.exerdemo.mvp.component.module.AppModule;
+import zkch.com.exerdemo.api.ApiService;
+import zkch.com.exerdemo.mvp.module.AppModule;
 
 
 /**
@@ -12,7 +13,7 @@ import zkch.com.exerdemo.mvp.component.module.AppModule;
 @Singleton
 @Component(modules = {AppModule.class})
 public interface AppComponent {
-
-//    public ApiService getApiService();  调用请求的接口
+    //调用请求的接口
+    ApiService getApiService();
 
 }

@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.mvp.component.module;
+package zkch.com.exerdemo.mvp.module;
 
 import android.app.Application;
 

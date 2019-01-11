@@ -9,33 +9,52 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import butterknife.OnItemSelected;
 import butterknife.Unbinder;
+import zkch.com.exerdemo.AppApplication;
+import zkch.com.exerdemo.mvp.component.AppComponent;
+import zkch.com.exerdemo.mvp.presenter.BasePresenter;
 
 /**BaseFragment
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
-   protected View rootView;
-    Unbinder bind;
+    private View rootView;
+    private Unbinder bind;
+    private AppApplication mApplication;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(getLayoutResID(), container, false);
+        rootView = inflater.inflate(getLayoutId(), container, false);
         bind = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
-    public abstract int getLayoutResID();
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mApplication = (AppApplication) getActivity().getApplication();
+        setUpActivityComponent(mApplication.getAppComponent());
+        init();
+    }
+
+    /**
+     * protected  修饰指继承该类可执行方法
+     */
+    protected abstract int getLayoutId();
+
+    protected abstract void setUpActivityComponent(AppComponent appComponent);
+
+    protected abstract void init();
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        bind.unbind();
+        if (bind != Unbinder.EMPTY) {
+            bind.unbind();
+        }
     }
 
 }

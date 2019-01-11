@@ -19,13 +19,10 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 
 import android.Manifest;
-
-import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.User;
 import zkch.com.exerdemo.base.BaseActivity;
@@ -83,16 +80,14 @@ public class SimpleActivity extends BaseActivity {
 
     private void initUser() {
         Object user = ACache.get(this).getAsObject(Constant.USER);
-        // TODO: 判断是否存储，不存储则不跳转
+        // TODO: 判断是否存储，不存储则不跳转 subscribe( new Consumer<Object>())
         if (user ==null){
             addDisposable(RxView.clicks(headerView)
             .throttleFirst(2, TimeUnit.SECONDS) //防重复点击
-            .subscribe()
+            .subscribe(o -> {
+                //  startActivity(new Intent(this, LoginActivity.class));
+            })
             );
-
-           /* headerView.setOnClickListener(v -> {
-              //  startActivity(new Intent(this, LoginActivity.class));
-            });*/
         }else{
            User mUser=(User)user;
            initUserHeadView(mUser);
@@ -102,7 +97,7 @@ public class SimpleActivity extends BaseActivity {
     }
 
     private void initUserHeadView(User user) {
-       // Glide.with(this).load(user.getLogo_url()).transition(new )
+        //Glide.with(this).load(user.getLogo_url()).transition(new  Gl)
     }
 
     /**
@@ -167,7 +162,7 @@ public class SimpleActivity extends BaseActivity {
     }
 
     /**
-     *   这个方法干啥的  回头看看视频
+     *   注入  DaggerLoginComponent
      * @param appComponent
      */
     @Override
@@ -175,5 +170,9 @@ public class SimpleActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.get().unregister(this);
+    }
 }

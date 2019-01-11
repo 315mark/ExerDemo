@@ -3,7 +3,6 @@ package zkch.com.exerdemo.base;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
@@ -17,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.mvp.component.AppComponent;
-import zkch.com.exerdemo.presenter.BasePresenter;
+import zkch.com.exerdemo.mvp.presenter.BasePresenter;
 import zkch.com.exerdemo.util.JumpUtils;
 import zkch.com.exerdemo.util.KeyboardUtils;
 

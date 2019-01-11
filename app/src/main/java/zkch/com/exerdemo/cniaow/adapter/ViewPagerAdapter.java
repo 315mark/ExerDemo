@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zkch.com.exerdemo.cniaow.bean.FragmentInfo;
+import zkch.com.exerdemo.cniaow.fragment.RecommendFragment;
 
 /**
  * 以FragmentList 为实体类  实现添加Fragment
@@ -23,7 +24,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initFragment() {
-//        mFragments.add(new FragmentInfo("推荐", RecommendFragment.class));
+        mFragments.add(new FragmentInfo("推荐", RecommendFragment.class));
 //        mFragments.add(new FragmentInfo("排行", TopListFragment.class));
 //        mFragments.add(new FragmentInfo("游戏", GamesFragment.class));
 //        mFragments.add(new FragmentInfo("分类", CategoryFragment.class));

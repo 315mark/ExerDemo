@@ -7,15 +7,18 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * <pre>
@@ -30,14 +33,20 @@ public final class PermissionUtils {
 
     public static void readPhonestate(Activity activity){
 
-        requestPermisson(activity, Manifest.permission.READ_PHONE_STATE).subscribe(new Subscriber<Boolean>() {
+        requestPermisson(activity, Manifest.permission.READ_PHONE_STATE).subscribe(new Observer<Boolean>() {
+
             @Override
-            public void onCompleted() {
+            public void onError(Throwable e) {
 
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
 
             }
 
@@ -51,14 +60,14 @@ public final class PermissionUtils {
 
     public static Observable<Boolean> requestPermisson(Activity activity, String permission){
 
-        RxPermissions rxPermissions = new RxPermissions(activity);
+        RxPermissions rxPermissions = new RxPermissions((FragmentActivity) activity);
 
         return rxPermissions.request(permission);
     }
 
-    public static Observable.Transformer<Object, Boolean> ensure(Activity activity, String permission){
+    public static ObservableTransformer<Object, Boolean> ensure(Activity activity, String permission){
 
-        RxPermissions rxPermissions = new RxPermissions(activity);
+        RxPermissions rxPermissions = new RxPermissions((FragmentActivity) activity);
 
         return  rxPermissions.ensure(permission);
 

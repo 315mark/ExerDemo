@@ -4,7 +4,7 @@ package zkch.com.exerdemo.api;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.BaseBean;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;

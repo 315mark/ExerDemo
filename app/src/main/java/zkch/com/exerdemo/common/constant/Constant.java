@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.common;
+package zkch.com.exerdemo.common.constant;
 /**
  * @author Ivan
  * @version V1.0

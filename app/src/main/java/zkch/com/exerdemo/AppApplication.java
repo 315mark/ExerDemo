@@ -9,11 +9,15 @@ import android.view.View;
 import com.mikepenz.iconics.Iconics;
 
 
+import io.reactivex.functions.Consumer;
+import io.reactivex.plugins.RxJavaPlugins;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.mvp.component.DaggerAppComponent;
 import zkch.com.exerdemo.mvp.module.AppModule;
+import zkch.com.exerdemo.mvp.module.HttpModule;
 import zkch.com.exerdemo.typeface.AliFont;
 import zkch.com.exerdemo.util.AppContextUtils;
+import zkch.com.exerdemo.util.ToastUtils;
 import zkch.com.exerdemo.util.Utils;
 
 
@@ -41,12 +45,17 @@ public class AppApplication extends MultiDexApplication {
         super.onCreate();
         appInstance = this;
 
+       /* RxJavaPlugins.setErrorHandler(throwable -> {
+            //异常处理
+            ToastUtils.showShort(throwable.getMessage());
+        });
+        */
         // AppComponent  配置完 先build 在调用下面这段
         //DaggerAppComponent.creat() 方法直接创建 前提注解组建不带参数
-        //
+        component =DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .httpModule(new HttpModule()).build();
 
-         component = DaggerAppComponent.builder().appModule(new
-                AppModule(this)).build();
         AppContextUtils.init(this);//应用工具初始化
 
         Utils.init(this);//初始化常用工具包

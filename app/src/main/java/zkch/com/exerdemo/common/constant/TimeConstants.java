@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.constant;
+package zkch.com.exerdemo.common.constant;
 
 import android.support.annotation.IntDef;
 

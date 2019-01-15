@@ -1,18 +1,17 @@
 package zkch.com.exerdemo.ui;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.hwangjr.rxbus.RxBus;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -28,7 +27,7 @@ import zkch.com.exerdemo.cniaow.bean.User;
 import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.adapter.ViewPagerAdapter;
 import zkch.com.exerdemo.common.ACache;
-import zkch.com.exerdemo.common.Constant;
+import zkch.com.exerdemo.common.constant.Constant;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.typeface.AliFont;
 import zkch.com.exerdemo.util.PermissionUtils;
@@ -62,6 +61,7 @@ public class SimpleActivity extends BaseActivity {
         return R.layout.activity_simple;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     protected void init() {
         RxBus.get().register(this);
@@ -70,7 +70,7 @@ public class SimpleActivity extends BaseActivity {
                     if (aBoolean){
                         initDrawerLayout();
                         initTLabayout();
-                        initUser();
+                       // initUser();
                     }else{
                         ToastUtils.showShort("请设置权限");
                     }
@@ -104,6 +104,7 @@ public class SimpleActivity extends BaseActivity {
      * 初始化抽屉布局   设置侧滑菜单的头像  用户名  ToolBar 图标
      */
     private void initDrawerLayout() {
+        navigaviewLeft =findViewById(R.id.navigaview_left);
         headerView =navigaviewLeft.getHeaderView(0);
         mUserHeadView = headerView.findViewById(R.id.img_avatar);
         mUserHeadView.setImageDrawable(new IconicsDrawable(this, AliFont.Icon.cniao_head).colorRes(R.color.white));

@@ -1,13 +1,12 @@
 package zkch.com.exerdemo.mvp.module;
 
 import dagger.Module;
-import rx.Observable;
+import io.reactivex.Observable;
 import zkch.com.exerdemo.api.ApiService;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.BaseBean;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
-import zkch.com.exerdemo.mvp.scope.ScopeFragment;
 
 /**
  *  推荐页面的 Model  负责提供接口  Presenter 负责处理
@@ -26,18 +25,17 @@ public class AppInfoModel {
      *   apiService  接口参数
      * @return
      */
+   public Observable<BaseBean<PageBean<AppInfo>>> getApp(){
+       return apiService.getApps("{'page':0}");
+   }
 
-    Observable<BaseBean<PageBean<AppInfo>>> getApp(){
-        return apiService.getApps("{'page':0}");
-    }
+   public Observable<BaseBean<IndexBean>> getIndex() {
+       return apiService.index();
+   }
 
-    Observable<BaseBean<IndexBean>> getIndex(){
-        return apiService.index();
-    }
-
-    Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
-        return apiService.topList(page);
-    }
+  public Observable<BaseBean<PageBean<AppInfo>>> toList(int page){
+       return apiService.topList(page);
+   }
 
 
 }

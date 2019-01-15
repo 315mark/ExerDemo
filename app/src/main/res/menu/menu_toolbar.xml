@@ -7,12 +7,11 @@
         android:title="搜索"
         app:showAsAction="ifRoom" />
 
-    <item
+   <!-- <item
         android:id="@+id/action_download"
         android:icon="@mipmap/ic_download"
         android:title="下载"
-
         app:showAsAction="ifRoom"
 
-        />
+        />-->
 </menu>

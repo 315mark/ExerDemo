@@ -8,8 +8,11 @@ import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
 import zkch.com.exerdemo.mvp.component.AppComponent;
+import zkch.com.exerdemo.mvp.component.DaggerRecommendComponent;
+import zkch.com.exerdemo.mvp.module.RecommendModule;
 import zkch.com.exerdemo.mvp.presenter.RecommendPresenter;
 import zkch.com.exerdemo.mvp.contract.AppInfoContract;
+import zkch.com.exerdemo.util.ToastUtils;
 
 /**
  * 推荐页面   多类型item 可从View层下手
@@ -26,7 +29,11 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     protected void init() {
+        initData();
+    }
 
+    private void initData() {
+        presenter.requestDatas();
     }
 
 
@@ -37,7 +44,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
-
+        DaggerRecommendComponent.builder().appComponent(appComponent)
+                .recommendModule(new RecommendModule(this))
+                .build().inject(this);
     }
 
 
@@ -47,7 +56,12 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     }
 
     @Override
-    public void showNodata() {
+    public void onEmptyViewClick() {
+        initData();
+    }
 
+    @Override
+    public void showNodata() {
+        ToastUtils.showShort("没有数据");
     }
 }

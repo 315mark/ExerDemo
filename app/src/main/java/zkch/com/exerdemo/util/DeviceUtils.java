@@ -13,6 +13,7 @@ import java.io.File;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * <pre>
@@ -224,6 +225,14 @@ public final class DeviceUtils {
         }
     }
 
+    public static String getLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
+    public static String getBuildVersionIncremental() {
+        return Build.VERSION.INCREMENTAL;
+    }
+
     /**
      * 重启到recovery
      * <p>需要root权限</p>
@@ -239,4 +248,13 @@ public final class DeviceUtils {
     public static void reboot2Bootloader() {
         ShellUtils.execCmd("reboot bootloader", true);
     }
+
+    public static int getScreenW(Context c) {
+        return c.getResources().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenH(Context c) {
+        return c.getResources().getDisplayMetrics().heightPixels;
+    }
+
 }

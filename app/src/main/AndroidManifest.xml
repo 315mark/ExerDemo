@@ -17,7 +17,9 @@
         android:name=".AppApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SimpleActivity">
+        <activity android:name=".ui.SimpleActivity"
+            android:theme="@style/AppTheme.Notitle.FullScreen"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

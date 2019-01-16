@@ -10,6 +10,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true//解决65536问题
+        //添加如下配置就OK了
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+
     }
 
     compileOptions {
@@ -33,7 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.jakewharton:butterknife:8.6.0'
 
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
@@ -52,8 +54,8 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-    //    rxbinding 带rxjava依赖
 
+    //    rxbinding 带rxjava依赖
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
     implementation 'com.hwangjr.rxbus:rxbus:2.0.1'
 
@@ -76,4 +78,8 @@ dependencies {
     implementation 'com.mikepenz:iconics-core:2.8.1@aar'
     implementation 'com.mikepenz:ionicons-typeface:2.0.1.3@aar'
     implementation 'com.mikepenz:fontawesome-typeface:4.6.0.1@aar'
+
+    //ButterKnife 缺一不可
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    implementation 'com.jakewharton:butterknife-compiler:8.8.1'
 }

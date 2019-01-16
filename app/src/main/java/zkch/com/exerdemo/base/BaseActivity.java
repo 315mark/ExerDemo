@@ -1,10 +1,10 @@
 package zkch.com.exerdemo.base;
 
+import android.support.annotation.Nullable;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
@@ -34,11 +34,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     T mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(),  new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);//防止输入法键盘遮挡输入框
-
         setContentView(getLayoutResID());
         bind = ButterKnife.bind(this);
         mApp= (AppApplication) getApplication();

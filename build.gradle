@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from :  "config.gradle"
 buildscript {
     
     repositories {
@@ -25,18 +25,5 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-//统一Gradle版本号
-ext {
-
-    // SDK And Tools
-    minSdkVersion = 19
-    targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = '28.0.0'
-
-    //Dependencies
-    supportLibraryVersion = '27.1.1'
-
 }
 

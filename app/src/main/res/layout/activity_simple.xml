@@ -9,11 +9,12 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.ToolBar"
         app:title="@string/app_name" />
+
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_Layout"
@@ -41,6 +42,7 @@
 
         </LinearLayout>
 
+
         <android.support.design.widget.NavigationView
             android:id="@+id/navigaview_left"
             android:layout_width="300dp"
@@ -50,5 +52,6 @@
             app:menu="@menu/menu_navigation_item" />
 
     </android.support.v4.widget.DrawerLayout>
+
 </LinearLayout>
 

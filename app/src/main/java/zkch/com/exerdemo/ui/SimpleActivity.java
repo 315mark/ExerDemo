@@ -2,18 +2,15 @@ package zkch.com.exerdemo.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -21,7 +18,9 @@ import com.hwangjr.rxbus.RxBus;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
+
 import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.base.BaseActivity;
@@ -64,11 +63,11 @@ public class SimpleActivity extends BaseActivity {
         RxBus.get().register(this);
         PermissionUtils.requestPermisson(this, Manifest.permission.READ_PHONE_STATE)
                 .subscribe(aBoolean -> {
-                    if (aBoolean){
+                    if (aBoolean) {
                         initDrawerLayout();
                         initTLabayout();
                         initUser();
-                    }else{
+                    } else {
                         ToastUtils.showShort("请设置权限");
                     }
                 });
@@ -86,14 +85,10 @@ public class SimpleActivity extends BaseActivity {
                         //  startActivity(new Intent(this, LoginActivity.class));
                     })
             );
-
-            logout();
-
         } else {
 
             User mUser = (User) user;
             initUserHeadView(mUser);
-
         }
 
     }
@@ -106,7 +101,7 @@ public class SimpleActivity extends BaseActivity {
         mUserHeadView.setImageDrawable(new IconicsDrawable(this, AliFont.Icon.cniao_head).colorRes(R.color.white));
         mTextUserName.setText("未登录");
         headerView.setOnClickListener(v -> {
-         //   startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            //   startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
 
@@ -125,9 +120,9 @@ public class SimpleActivity extends BaseActivity {
     private void initDrawerLayout() {
 
         headerView = navigaviewLeft.getHeaderView(0);
-        mUserHeadView =  headerView.findViewById(R.id.img_avatar);
+        mUserHeadView = headerView.findViewById(R.id.img_avatar);
         mUserHeadView.setImageDrawable(new IconicsDrawable(this, AliFont.Icon.cniao_head).colorRes(R.color.white));
-        mTextUserName =  headerView.findViewById(R.id.user_name);
+        mTextUserName = headerView.findViewById(R.id.user_name);
         navigaviewLeft.getMenu().findItem(R.id.item_update).setIcon(new IconicsDrawable(this, Ionicons.Icon.ion_ios_loop));
         navigaviewLeft.getMenu().findItem(R.id.item_download).setIcon(new IconicsDrawable(this, AliFont.Icon.cniao_download));
         navigaviewLeft.getMenu().findItem(R.id.item_remove).setIcon(new IconicsDrawable(this, Ionicons.Icon.ion_ios_trash_outline));
@@ -138,7 +133,7 @@ public class SimpleActivity extends BaseActivity {
         navigaviewLeft.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_login:
-
+                    logout();
                     break;
                 case R.id.item_update:
 

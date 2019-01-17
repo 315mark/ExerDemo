@@ -1,23 +1,26 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
+import zkch.com.exerdemo.cniaow.adapter.IndexMultAdapter;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.mvp.component.DaggerRecommendComponent;
+import zkch.com.exerdemo.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.mvp.module.RecommendModule;
 import zkch.com.exerdemo.mvp.presenter.RecommendPresenter;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.util.ToastUtils;
 
 /**
  * 推荐页面   多类型item 可从View层下手
  */
-public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.RecyView{
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.RecyView {
 
     @BindView(R.id.recyleView)
     RecyclerView recyleView;
@@ -25,6 +28,8 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @Inject
     RecommendPresenter presenter;
 
+    //Adapter 适配器
+    private IndexMultAdapter adapter;
 
 
     @Override
@@ -36,6 +41,22 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         presenter.requestDatas();
     }
 
+    @Override
+    public void showResult(IndexBean indexBean) {
+        initRecycleView();
+        adapter.setData(indexBean);
+    }
+
+    /**
+     * 添加动画
+     */
+    private void initRecycleView() {
+        // 设置布局管理器
+        recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyleView.setItemAnimator(new DefaultItemAnimator());
+        adapter = new IndexMultAdapter(getActivity());
+        recyleView.setAdapter(adapter);
+    }
 
     @Override
     protected int setLayout() {
@@ -49,11 +70,6 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
                 .build().inject(this);
     }
 
-
-    @Override
-    public void showResult(IndexBean indexBean) {
-
-    }
 
     @Override
     public void onEmptyViewClick() {

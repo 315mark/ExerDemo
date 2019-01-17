@@ -11,21 +11,21 @@ import zkch.com.exerdemo.ui.SimpleActivity;
 
 public abstract class ErrorHandlerSubscriber<T> extends DefaultSunscriber<T> {
 
-    protected RxErrorHandler mErrorHandler=null;
+    protected RxErrorHandler mErrorHandler;
     protected Context context;
 
     public ErrorHandlerSubscriber(Context context) {
         this.context = context;
-        mErrorHandler =new RxErrorHandler(context);
+        mErrorHandler = new RxErrorHandler(context);
     }
 
     @Override
     public void onError(Throwable e) {
-        BaseException Exception =mErrorHandler.handlerError(e);
-        if (Exception == null){
+        BaseException Exception = mErrorHandler.handlerError(e);
+        if (Exception == null) {
             e.printStackTrace();
             Log.d("APPSTORE", "onError: " + e.getMessage());
-        }else{
+        } else {
             mErrorHandler.showErrorMsg(Exception);
             if (Exception.getCode() == BaseException.ERROR_TOKEN) {
                 toLogin();
@@ -33,7 +33,7 @@ public abstract class ErrorHandlerSubscriber<T> extends DefaultSunscriber<T> {
         }
     }
 
-    private void toLogin(){
+    private void toLogin() {
         Intent intent = new Intent(context, SimpleActivity.class);
         context.startActivity(intent);
     }

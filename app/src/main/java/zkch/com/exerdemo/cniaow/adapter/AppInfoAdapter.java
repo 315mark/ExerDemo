@@ -1,5 +1,6 @@
 package zkch.com.exerdemo.cniaow.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
+import zkch.com.exerdemo.util.LogUtils;
 
 /**
  * 采用Builder 构造者模式 复用item
@@ -23,9 +25,11 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
         this.mBuilder = builder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void convert(BaseViewHolder helper, AppInfo item) {
-        Glide.with(getRecyclerView()).load(baseImgUrl + item.getIcon()).into((ImageView) helper.getView(R.id.img_app_icon));
+        LogUtils.i(getClass().getName(), "执行到此 ");
+        Glide.with(mContext).load(baseImgUrl + item.getIcon()).into((ImageView) helper.getView(R.id.img_app_icon));
         helper.setText(R.id.txt_app_name, item.getDisplayName())
                 .setText(R.id.txt_brief, item.getBriefShow());
         TextView txtViewPosition = helper.getView(R.id.txt_position);
@@ -37,7 +41,6 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
         TextView txtViewBrief = helper.getView(R.id.txt_brief);
         txtViewBrief.setVisibility(mBuilder.isShowBrief ? View.VISIBLE : View.GONE);
         txtViewBrief.setText(item.getBriefShow());
-
     }
 
 

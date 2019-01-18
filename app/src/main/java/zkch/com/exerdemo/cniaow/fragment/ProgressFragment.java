@@ -19,7 +19,7 @@ import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.mvp.presenter.BasePresenter;
-import zkch.com.exerdemo.ui.BaseView;
+import zkch.com.exerdemo.cniaow.ui.BaseView;
 
 
 /**

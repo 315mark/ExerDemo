@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.ui;
+package zkch.com.exerdemo.cniaow.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -66,7 +66,7 @@ public class SimpleActivity extends BaseActivity {
                     if (aBoolean) {
                         initDrawerLayout();
                         initTLabayout();
-                        initUser();
+                        //  initUser();
                     } else {
                         ToastUtils.showShort("请设置权限");
                     }

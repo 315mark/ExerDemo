@@ -1,13 +1,20 @@
 package zkch.com.exerdemo.api;
 
 
+import java.util.List;
+
+import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import io.reactivex.Observable;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.BaseBean;
+import zkch.com.exerdemo.cniaow.bean.Category;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
+import zkch.com.exerdemo.cniaow.bean.LoginBean;
+import zkch.com.exerdemo.cniaow.bean.LoginRequestBean;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
 
 public interface ApiService {
@@ -34,11 +41,12 @@ public interface ApiService {
     Observable<BaseBean<PageBean<AppInfo>>> game(@Query("page") int page);
 
 
-//    @POST("login")
-//    Observable<BaseBean<LoginBean>> login(@Body LoginRequestBean param);
-//
-//    @GET("category")
-//    Observable<BaseBean<List<Category>>> getCategories();
+    @POST("login")
+    Observable<BaseBean<LoginBean>> login(@Body LoginRequestBean param);
+
+    //
+    @GET("category")
+    Observable<BaseBean<List<Category>>> getCategories();
 
 
     /**
@@ -52,6 +60,7 @@ public interface ApiService {
 
     @GET("category/newlist/{categoryid}")
     Observable<BaseBean<PageBean<AppInfo>>> getNewListAppsByCategory(@Path("categoryid") int categoryid, @Query("page") int page);
+
     @GET("app/{id}")
     Observable<BaseBean<AppInfo>> getAppDetail(@Path("id") int id);
 

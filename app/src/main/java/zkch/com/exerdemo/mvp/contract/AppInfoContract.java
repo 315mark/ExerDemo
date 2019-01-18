@@ -3,7 +3,7 @@ package zkch.com.exerdemo.mvp.contract;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
-import zkch.com.exerdemo.ui.BaseView;
+import zkch.com.exerdemo.cniaow.ui.BaseView;
 
 /**
  *  契约层  IView IPersenter 都定义到Contract层

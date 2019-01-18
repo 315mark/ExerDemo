@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.util.Log;
 
 import io.reactivex.disposables.Disposable;
+import zkch.com.exerdemo.cniaow.ui.SimpleActivity;
 import zkch.com.exerdemo.common.exception.BaseException;
 import zkch.com.exerdemo.common.rx.RxErrorHandler;
-import zkch.com.exerdemo.ui.SimpleActivity;
 
-public abstract class ErrorHandlerSubscriber<T> extends DefaultSunscriber<T> {
+public abstract class ErrorHandlerObserver<T> extends DefaultSunscriber<T> {
 
     protected RxErrorHandler mErrorHandler;
     protected Context context;
 
-    public ErrorHandlerSubscriber(Context context) {
+    public ErrorHandlerObserver(Context context) {
         this.context = context;
         mErrorHandler = new RxErrorHandler(context);
     }

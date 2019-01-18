@@ -2,10 +2,10 @@ package zkch.com.exerdemo.common.subscriber;
 
 import android.content.Context;
 
-public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber<T> {
+public abstract class ProgressDialogObserver<T> extends ErrorHandlerObserver<T> {
 
 
-    public ProgressDialogSubscriber(Context context) {
+    public ProgressDialogObserver(Context context) {
         super(context);
     }
 

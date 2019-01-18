@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import zkch.com.exerdemo.ui.BaseView;
+import zkch.com.exerdemo.cniaow.ui.BaseView;
 
 public class BasePresenter <M,V extends BaseView>{
 

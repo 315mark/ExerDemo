@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.Banner;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
+import zkch.com.exerdemo.util.LogUtils;
 import zkch.com.exerdemo.widget.BannerLayout;
 
 /**
@@ -92,17 +94,16 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return new BannerViewHolder(mLayoutInflater.inflate(R.layout.template_banner, parent, false));
 
             case TYPE_ICON:
-                return new BannerViewHolder(mLayoutInflater.inflate(R.layout.activity_main, parent, false));
+                return new NavIconViewHolder(mLayoutInflater.inflate(R.layout.template_nav_icon, parent, false));
 
             case TYPE_APPS:
                 return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, parent, false), TYPE_APPS);
 
             case TYPE_GAMES:
                 return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, parent, false), TYPE_GAMES);
-
-            default:
-                return null;
         }
+
+        return null;
 
     }
 
@@ -122,36 +123,37 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 bannerHolder.banner.setOnBannerItemClickListener(position1 -> Log.i("AAA", "onItemClick: " + position1));
                 break;
 
-            case 1:    //
-
+            case 1:    //热门主题
+                NavIconViewHolder iconViewHolder = (NavIconViewHolder) holder;
 
                 break;
 
-
             case 2:    //热门应用 //热门游戏
-                AppViewHolder appHolder = (AppViewHolder) holder;
-                AppInfoAdapter mAdapter = AppInfoAdapter.build().showBrief(false)
-                        .showCategoryName(true).showPosition(false).build();
-                if (appHolder.type == TYPE_APPS) {
-                    appHolder.text.setText("热门应用");
-                    mAdapter.addData(mIndexBean.getRecommendApps());
+                AppViewHolder appViewHolder = (AppViewHolder) holder;
+                AppInfoAdapter appInfoAdapter = AppInfoAdapter.build().showPosition(false)
+                        .showCategoryName(true)
+                        .showBrief(false)
+                        .build();
+                if (appViewHolder.type == TYPE_APPS) {
+                    appViewHolder.text.setText("热门应用");
+                    LogUtils.i(getClass().getName(), mIndexBean.getRecommendApps());
+                    appInfoAdapter.addData(mIndexBean.getRecommendApps());
                 } else {
-                    appHolder.text.setText("热门游戏");
-                    mAdapter.addData(mIndexBean.getRecommendGames());
+                    appViewHolder.text.setText("热门游戏");
+                    LogUtils.i(getClass().getName(), mIndexBean.getRecommendGames());
+                    appInfoAdapter.addData(mIndexBean.getRecommendGames());
                 }
-                appHolder.recyleView.setAdapter(mAdapter);
-                appHolder.recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
+                // TODO: set inner adapter
+                appViewHolder.recyleView.setAdapter(appInfoAdapter);
+                appViewHolder.recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
                     @Override
                     public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
                     }
                 });
-
                 break;
 
-            case 3:
-
-
+            default:
                 break;
         }
     }
@@ -162,7 +164,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return 4;
     }
 
-    private class BannerViewHolder extends RecyclerView.ViewHolder {
+    class BannerViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         BannerLayout banner;
 
@@ -173,14 +175,14 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private class ImgLoader implements BannerLayout.ImageLoader {
+    class ImgLoader implements BannerLayout.ImageLoader {
         @Override
         public void displayImage(Context context, String path, ImageView imageView) {
             Glide.with(mContext).load(path).into(imageView);
         }
     }
 
-    private class AppViewHolder extends RecyclerView.ViewHolder {
+    class AppViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text)
         TextView text;
         @BindView(R.id.recyleView)
@@ -190,6 +192,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public AppViewHolder(View view, int typeApps) {
             super(view);
+            ButterKnife.bind(this, view);
             this.type = typeApps;
             initRecyclerView();
         }
@@ -205,6 +208,21 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             recyleView.addItemDecoration(itemDecoration);
         }
 
+    }
+
+
+    class NavIconViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.layout_hot_apps)
+        LinearLayout layoutHotApps;
+        @BindView(R.id.layout_hot_game)
+        LinearLayout layoutHotGame;
+        @BindView(R.id.layout_hot_subject)
+        LinearLayout layoutHotSubject;
+
+        public NavIconViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.ui;
+package zkch.com.exerdemo.cniaow.ui;
 
 public interface BaseView {
     /**

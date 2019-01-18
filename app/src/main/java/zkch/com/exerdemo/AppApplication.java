@@ -1,23 +1,18 @@
 package zkch.com.exerdemo;
-import android.content.Context;
 
+import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.view.View;
 
-
 import com.mikepenz.iconics.Iconics;
 
-
-import io.reactivex.functions.Consumer;
-import io.reactivex.plugins.RxJavaPlugins;
 import zkch.com.exerdemo.mvp.component.AppComponent;
 import zkch.com.exerdemo.mvp.component.DaggerAppComponent;
 import zkch.com.exerdemo.mvp.module.AppModule;
 import zkch.com.exerdemo.mvp.module.HttpModule;
 import zkch.com.exerdemo.typeface.AliFont;
 import zkch.com.exerdemo.util.AppContextUtils;
-import zkch.com.exerdemo.util.ToastUtils;
 import zkch.com.exerdemo.util.Utils;
 
 
@@ -45,14 +40,9 @@ public class AppApplication extends MultiDexApplication {
         super.onCreate();
         appInstance = this;
 
-       /* RxJavaPlugins.setErrorHandler(throwable -> {
-            //异常处理
-            ToastUtils.showShort(throwable.getMessage());
-        });
-        */
         // AppComponent  配置完 先build 在调用下面这段
         //DaggerAppComponent.creat() 方法直接创建 前提注解组建不带参数
-        component =DaggerAppComponent.builder()
+        component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .httpModule(new HttpModule()).build();
 

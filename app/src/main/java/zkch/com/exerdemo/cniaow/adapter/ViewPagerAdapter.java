@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zkch.com.exerdemo.cniaow.bean.FragmentInfo;
+import zkch.com.exerdemo.cniaow.fragment.CategoryFragment;
+import zkch.com.exerdemo.cniaow.fragment.GamesFragment;
 import zkch.com.exerdemo.cniaow.fragment.RecommendFragment;
+import zkch.com.exerdemo.cniaow.fragment.TopListFragment;
 
 /**
  * 以FragmentList 为实体类  实现添加Fragment
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<FragmentInfo> mFragments =new ArrayList<>();
+    private List<FragmentInfo> mFragments = new ArrayList<>();
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -25,16 +28,16 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private void initFragment() {
         mFragments.add(new FragmentInfo("推荐", RecommendFragment.class));
-//        mFragments.add(new FragmentInfo("排行", TopListFragment.class));
-//        mFragments.add(new FragmentInfo("游戏", GamesFragment.class));
-//        mFragments.add(new FragmentInfo("分类", CategoryFragment.class));
+        mFragments.add(new FragmentInfo("排行", TopListFragment.class));
+        mFragments.add(new FragmentInfo("游戏", GamesFragment.class));
+        mFragments.add(new FragmentInfo("分类", CategoryFragment.class));
     }
 
     @Override
     public Fragment getItem(int position) {
         Fragment fragment;
         try {
-            fragment= (Fragment) mFragments.get(position).getFragment().newInstance();
+            fragment = (Fragment) mFragments.get(position).getFragment().newInstance();
             return fragment;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();

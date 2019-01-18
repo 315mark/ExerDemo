@@ -3,25 +3,25 @@ package zkch.com.exerdemo.common.subscriber;
 import android.content.Context;
 
 import io.reactivex.disposables.Disposable;
+import zkch.com.exerdemo.cniaow.ui.BaseView;
 import zkch.com.exerdemo.common.exception.BaseException;
-import zkch.com.exerdemo.ui.BaseView;
 
-public abstract class ProgressSubscriber<T> extends ErrorHandlerSubscriber<T> {
+public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
     private BaseView mBaseView;
 
-    public ProgressSubscriber(Context context, BaseView mView) {
+    public ProgressObserver(Context context, BaseView mView) {
         super(context);
-        this.mBaseView=mView;
+        this.mBaseView = mView;
     }
 
     @Override
     public void onError(Throwable e) {
         super.onError(e);
-        if (e !=null){
+        if (e != null) {
             BaseException baseException = mErrorHandler.handlerError(e);
             if (e.getMessage().equals("permission disgranted")) {
                 mBaseView.showError("授权失败");
-            }else{
+            } else {
                 mBaseView.showError(baseException.getDisplayMsg());
             }
         }
@@ -39,7 +39,7 @@ public abstract class ProgressSubscriber<T> extends ErrorHandlerSubscriber<T> {
         mBaseView.dismissLoading();
     }
 
-    public boolean isShowProgress(){
+    public boolean isShowProgress() {
         return true;
     }
 

@@ -11,12 +11,13 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import zkch.com.exerdemo.AppApplication;
-import zkch.com.exerdemo.mvp.component.AppComponent;
-import zkch.com.exerdemo.mvp.presenter.BasePresenter;
+import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.presenter.BasePresenter;
 
-/**BaseFragment
+
+/**
+ * BaseFragment
  */
-
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
     private View rootView;

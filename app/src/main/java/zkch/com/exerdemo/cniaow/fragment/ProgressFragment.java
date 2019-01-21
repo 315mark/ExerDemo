@@ -9,24 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.jakewharton.rxbinding2.view.RxView;
+
 import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.R;
-import zkch.com.exerdemo.mvp.component.AppComponent;
-import zkch.com.exerdemo.mvp.presenter.BasePresenter;
+import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.presenter.BasePresenter;
 import zkch.com.exerdemo.cniaow.ui.BaseView;
 
 
 /**
  * 打造带进度的Fragment 基类
+ *
  * @param <T>
  */
-public abstract class ProgressFragment<T extends BasePresenter> extends Fragment implements BaseView{
+public abstract class ProgressFragment<T extends BasePresenter> extends Fragment implements BaseView {
 
     private FrameLayout mRootView;
     private FrameLayout mContentView;
@@ -43,11 +47,11 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView= (FrameLayout) inflater.inflate(R.layout.fragment_progress,container,false);
-        mContentView= mRootView.findViewById(R.id.view_content);
-        mViewProgress =mRootView.findViewById(R.id.view_progress);
-        mViewEmpty =mRootView.findViewById(R.id.view_empty);
-        mTextError =mRootView.findViewById(R.id.text_tip);
+        mRootView = (FrameLayout) inflater.inflate(R.layout.fragment_progress, container, false);
+        mContentView = mRootView.findViewById(R.id.view_content);
+        mViewProgress = mRootView.findViewById(R.id.view_progress);
+        mViewEmpty = mRootView.findViewById(R.id.view_empty);
+        mTextError = mRootView.findViewById(R.id.text_tip);
         addDisposable(RxView.clicks(mViewEmpty).subscribe(o -> onEmptyViewClick()));
 
         return mRootView;
@@ -65,11 +69,11 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     }
 
     /**
-     *  这里添加最核心布局
+     * 这里添加最核心布局
      */
-    private void setRealContentView(){
-        View RealView= LayoutInflater.from(getActivity()).inflate(setLayout(),mContentView,true);
-        unbinder= ButterKnife.bind(this,RealView);
+    private void setRealContentView() {
+        View RealView = LayoutInflater.from(getActivity()).inflate(setLayout(), mContentView, true);
+        unbinder = ButterKnife.bind(this, RealView);
     }
 
 
@@ -95,7 +99,8 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
 
 
     /**
-     *  网络请求 多布局选择操作
+     * 网络请求 多布局选择操作
+     *
      * @param viewId
      */
     private void showView(int viewId) {

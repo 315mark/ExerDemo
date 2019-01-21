@@ -1,7 +1,8 @@
 package zkch.com.exerdemo.cniaow;
 
 import zkch.com.exerdemo.base.BaseActivity;
-import zkch.com.exerdemo.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+
 
 public class MainActivity extends BaseActivity {
 

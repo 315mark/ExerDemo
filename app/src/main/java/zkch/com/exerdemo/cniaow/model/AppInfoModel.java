@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.mvp.module;
+package zkch.com.exerdemo.cniaow.model;
 
 import dagger.Module;
 import io.reactivex.Observable;

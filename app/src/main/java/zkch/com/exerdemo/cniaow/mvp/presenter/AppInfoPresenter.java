@@ -1,14 +1,16 @@
-package zkch.com.exerdemo.mvp.presenter;
+package zkch.com.exerdemo.cniaow.mvp.presenter;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
+import zkch.com.exerdemo.cniaow.model.AppInfoModel;
+import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.common.rx.RxHttpReponseCompat;
 import zkch.com.exerdemo.common.subscriber.ErrorHandlerObserver;
 import zkch.com.exerdemo.common.subscriber.ProgressObserver;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
-import zkch.com.exerdemo.mvp.module.AppInfoModel;
 
 public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContract.AppInfoView> {
 
@@ -23,7 +25,7 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
     // TODO: 新品
     public static final int NEWLIST = 2;
 
-
+    @Inject
     public AppInfoPresenter(AppInfoModel mModel, AppInfoContract.AppInfoView mView) {
         super(mModel, mView);
     }

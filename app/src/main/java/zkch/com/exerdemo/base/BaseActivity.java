@@ -1,9 +1,9 @@
 package zkch.com.exerdemo.base;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MotionEvent;
 
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
@@ -15,15 +15,15 @@ import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import zkch.com.exerdemo.AppApplication;
-import zkch.com.exerdemo.mvp.component.AppComponent;
-import zkch.com.exerdemo.mvp.presenter.BasePresenter;
+import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.presenter.BasePresenter;
 import zkch.com.exerdemo.util.JumpUtils;
 import zkch.com.exerdemo.util.KeyboardUtils;
 
 
 /**
- *  基础Activity   封装RxBinding
- *  实例化的Disposable需在不用时及时销毁
+ * 基础Activity   封装RxBinding
+ * 实例化的Disposable需在不用时及时销毁
  */
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
     public CompositeDisposable mCompositeDisposable;
@@ -35,11 +35,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory(getLayoutInflater(),  new IconicsLayoutInflater(getDelegate()));
+        LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
         bind = ButterKnife.bind(this);
-        mApp= (AppApplication) getApplication();
+        mApp = (AppApplication) getApplication();
         //组件依赖注入全局级别的Application component
         setupActivityComponent(mApp.getAppComponent());
         //进行RxBinding 绑定
@@ -82,6 +82,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     /**
      * 点击空白区域 自动隐藏软键盘
+     *
      * @param event
      * @return
      */

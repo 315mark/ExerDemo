@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.mvp.scope;
+package zkch.com.exerdemo.cniaow.mvp.scope;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

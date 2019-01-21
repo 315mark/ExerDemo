@@ -1,4 +1,4 @@
-package zkch.com.exerdemo.mvp.module;
+package zkch.com.exerdemo.cniaow.mvp.module;
 
 import android.app.ProgressDialog;
 
@@ -6,7 +6,9 @@ import dagger.Module;
 import dagger.Provides;
 import zkch.com.exerdemo.api.ApiService;
 import zkch.com.exerdemo.cniaow.fragment.RecommendFragment;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
+import zkch.com.exerdemo.cniaow.model.AppInfoModel;
+import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
+
 
 @Module
 public class RecommendModule {

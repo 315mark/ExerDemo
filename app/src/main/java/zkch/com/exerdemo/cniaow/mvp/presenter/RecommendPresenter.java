@@ -1,12 +1,12 @@
-package zkch.com.exerdemo.mvp.presenter;
+package zkch.com.exerdemo.cniaow.mvp.presenter;
 
 import javax.inject.Inject;
 
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
+import zkch.com.exerdemo.cniaow.model.AppInfoModel;
+import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.common.rx.RxHttpReponseCompat;
 import zkch.com.exerdemo.common.subscriber.ProgressObserver;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
-import zkch.com.exerdemo.mvp.module.AppInfoModel;
 
 public class RecommendPresenter extends BasePresenter<AppInfoModel, AppInfoContract.RecyView> {
 

@@ -10,11 +10,11 @@ import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.adapter.IndexMultAdapter;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
-import zkch.com.exerdemo.mvp.component.AppComponent;
-import zkch.com.exerdemo.mvp.component.DaggerRecommendComponent;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
-import zkch.com.exerdemo.mvp.module.RecommendModule;
-import zkch.com.exerdemo.mvp.presenter.RecommendPresenter;
+import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.component.DaggerRecommendComponent;
+import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
+import zkch.com.exerdemo.cniaow.mvp.module.RecommendModule;
+import zkch.com.exerdemo.cniaow.mvp.presenter.RecommendPresenter;
 import zkch.com.exerdemo.util.ToastUtils;
 
 /**

@@ -14,8 +14,8 @@ import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.adapter.AppInfoAdapter;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
-import zkch.com.exerdemo.mvp.contract.AppInfoContract;
-import zkch.com.exerdemo.mvp.presenter.AppInfoPresenter;
+import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
+import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 
 public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter> implements
         AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
@@ -39,6 +39,12 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     @Override
     protected void init() {
+        mPresenter.requestData(type(), page);
+        initRecyView();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
         mPresenter.requestData(type(), page);
     }
 

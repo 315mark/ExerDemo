@@ -21,6 +21,7 @@ public class TopListFragment extends BaseAppInfoFragment {
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
+        //TODO
         DaggerAppInfoComponent.builder().appComponent(appComponent)
                 .appInfoModule(new AppInfoModule(this)).build();
     }

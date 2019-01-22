@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".cniaow.MainActivity" />
+        <activity android:name=".cniaow.ui.MainActivity" />
     </application>
 
 </manifest>

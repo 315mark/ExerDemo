@@ -65,6 +65,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
+        //TODO
         DaggerRecommendComponent.builder().appComponent(appComponent)
                 .recommendModule(new RecommendModule(this))
                 .build().inject(this);

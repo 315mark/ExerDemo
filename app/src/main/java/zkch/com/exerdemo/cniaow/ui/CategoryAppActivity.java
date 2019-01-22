@@ -1,10 +1,9 @@
-package zkch.com.exerdemo.cniaow;
+package zkch.com.exerdemo.cniaow.ui;
 
 import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
 
-
-public class MainActivity extends BaseActivity {
+public class CategoryAppActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
@@ -16,9 +15,13 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    /**
+     * 设置Activity Component
+     *
+     * @param appComponent
+     */
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
 
     }
-
 }

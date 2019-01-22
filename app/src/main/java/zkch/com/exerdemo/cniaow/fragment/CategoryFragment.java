@@ -12,9 +12,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
+import zkch.com.exerdemo.cniaow.adapter.CategoryAdapter;
 import zkch.com.exerdemo.cniaow.bean.Category;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.component.DaggerCategoryComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.CategoryContract;
+import zkch.com.exerdemo.cniaow.mvp.module.CategoryModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.CategoryPresenter;
 
 //分类界面
@@ -22,7 +25,7 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
 
     @BindView(R.id.recyleView)
     RecyclerView recyleView;
-
+    private CategoryAdapter mAdapter;
 
     @Override
     protected void init() {
@@ -35,8 +38,8 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         recyleView.addItemDecoration(itemDecoration);
         //设置数据源
-
-        // recyleView.setAdapter(mAdapter);
+        mAdapter = new CategoryAdapter();
+        recyleView.setAdapter(mAdapter);
         recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -55,12 +58,13 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
-
+        DaggerCategoryComponent.builder().appComponent(appComponent)
+                .categoryModule(new CategoryModule(this)).build();
     }
 
     @Override
     public void showData(List<Category> categories) {
-
+        mAdapter.addData(categories);
     }
 
 }

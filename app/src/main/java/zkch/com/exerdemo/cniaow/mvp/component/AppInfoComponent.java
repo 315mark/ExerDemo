@@ -1,6 +1,7 @@
 package zkch.com.exerdemo.cniaow.mvp.component;
 
 import dagger.Component;
+import zkch.com.exerdemo.cniaow.fragment.CategoryAppFragment;
 import zkch.com.exerdemo.cniaow.fragment.GamesFragment;
 import zkch.com.exerdemo.cniaow.fragment.TopListFragment;
 import zkch.com.exerdemo.cniaow.mvp.module.AppInfoModule;
@@ -15,5 +16,5 @@ public interface AppInfoComponent {
 
     void injectGameFragment(GamesFragment fragment);
 
-    //void injectCategoryAppFragment(CategoryAppFragment fragment);
+    void injectCategoryAppFragment(CategoryAppFragment fragment);
 }

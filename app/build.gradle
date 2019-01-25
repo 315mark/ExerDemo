@@ -46,7 +46,7 @@ dependencies {
     implementation rootProject.ext.dependencies["butterknife-compiler"]
 
     implementation rootProject.ext.dependencies["dagger"]
-    annotationProcessor  rootProject.ext.dependencies["dagger-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
     implementation rootProject.ext.dependencies["retrofit2"]
     implementation rootProject.ext.dependencies["rxjava2"]
@@ -63,7 +63,7 @@ dependencies {
 
     /*下拉刷新及加载更多控件*/
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-
+    //添加android缺失的部分javax注解
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
     //recyleView
@@ -78,4 +78,11 @@ dependencies {
 
     //权限  图片 框架
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    //向下扩展TextView
+    implementation 'com.ms-square:expandableTextView:0.1.4'
+    //对话框
+    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+    //CoordinatorLayout协调子View之间进行交互动作 核心就 behavior
+    implementation 'com.zoonref:simple-view-behavior:1.0'
 }

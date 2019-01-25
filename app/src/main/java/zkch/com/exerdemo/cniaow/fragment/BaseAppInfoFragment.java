@@ -1,5 +1,6 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
+import zkch.com.exerdemo.cniaow.ui.AppDetailActivity;
 
 public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter> implements
         AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
@@ -61,10 +63,10 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 //存储视图
                 mApplication.setmView(view);
-                /*Intent intent = new Intent(getActivity(), AppDetailActivity.class);
+                Intent intent = new Intent(getActivity(), AppDetailActivity.class);
                 AppInfo appInfo = mAdapter.getItem(position);
                 intent.putExtra("appinfo", appInfo);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
     }

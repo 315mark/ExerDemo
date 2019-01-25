@@ -23,6 +23,7 @@ public class GamesFragment extends BaseAppInfoFragment {
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
         DaggerAppInfoComponent.builder().appComponent(appComponent)
-                .appInfoModule(new AppInfoModule(this)).build();
+                .appInfoModule(new AppInfoModule(this)).build()
+                .injectGameFragment(this);
     }
 }

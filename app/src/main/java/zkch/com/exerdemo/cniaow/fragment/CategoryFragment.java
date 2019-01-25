@@ -1,5 +1,6 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import zkch.com.exerdemo.cniaow.mvp.component.DaggerCategoryComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.CategoryContract;
 import zkch.com.exerdemo.cniaow.mvp.module.CategoryModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.CategoryPresenter;
+import zkch.com.exerdemo.cniaow.ui.CategoryAppActivity;
+import zkch.com.exerdemo.common.constant.Constant;
 
 //分类界面
 public class CategoryFragment extends ProgressFragment<CategoryPresenter> implements CategoryContract.CategoryView {
@@ -43,10 +46,10 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
         recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                /*Intent intent = new Intent();
+                Intent intent = new Intent();
                 intent.setClass(getActivity(), CategoryAppActivity.class);
                 intent.putExtra(Constant.CATEGORY, mAdapter.getData().get(position));
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
     }

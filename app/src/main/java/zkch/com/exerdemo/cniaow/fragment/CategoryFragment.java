@@ -1,7 +1,6 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
 import android.content.Intent;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,6 +21,7 @@ import zkch.com.exerdemo.cniaow.mvp.module.CategoryModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.CategoryPresenter;
 import zkch.com.exerdemo.cniaow.ui.CategoryAppActivity;
 import zkch.com.exerdemo.common.constant.Constant;
+import zkch.com.exerdemo.widget.DividerItemDecoration;
 
 //分类界面
 public class CategoryFragment extends ProgressFragment<CategoryPresenter> implements CategoryContract.CategoryView {
@@ -38,7 +38,7 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
 
     private void initRecyclerView() {
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
         recyleView.addItemDecoration(itemDecoration);
         //设置数据源
         mAdapter = new CategoryAdapter();

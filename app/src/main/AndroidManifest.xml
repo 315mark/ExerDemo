@@ -36,6 +36,7 @@
         <activity android:name=".cniaow.ui.MainActivity" />
         <activity android:name=".cniaow.ui.CategoryAppActivity" />
         <activity android:name=".cniaow.ui.AppDetailActivity" />
+        <activity android:name=".cniaow.ui.GuideActivity" />
 
     </application>
 

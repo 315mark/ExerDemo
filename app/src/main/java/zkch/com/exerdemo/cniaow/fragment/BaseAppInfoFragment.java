@@ -2,7 +2,6 @@ package zkch.com.exerdemo.cniaow.fragment;
 
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,6 +17,7 @@ import zkch.com.exerdemo.cniaow.bean.PageBean;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 import zkch.com.exerdemo.cniaow.ui.AppDetailActivity;
+import zkch.com.exerdemo.widget.DividerItemDecoration;
 
 public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter> implements
         AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
@@ -54,7 +54,7 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
         //设置布局管理器
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyleView.setItemAnimator(new DefaultItemAnimator());
-        recyleView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        recyleView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mAdapter = buildAdater();
         mAdapter.setOnLoadMoreListener(this, recyleView);
         recyleView.setAdapter(mAdapter);

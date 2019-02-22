@@ -44,7 +44,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
     }
 
 
-    public static Builder build() {
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -54,6 +54,10 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
         private boolean isShowCategoryName;
         private boolean isShowBrief;
 
+        private int layoutId = R.layout.template_appinfo;
+        private boolean isUpdateStatus;
+        //RxDownload
+        // private RxDownload mRxDownload;
 
         public Builder showBrief(boolean b) {
             isShowBrief = b;
@@ -72,6 +76,22 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
 
         public AppInfoAdapter build() {
             return new AppInfoAdapter(this);
+        }
+
+        public Builder layout(int resId) {
+            this.layoutId = resId;
+            return this;
+        }
+
+        //TODO
+       /* public Builder rxDownload(RxDownload rxDownload) {
+            this.mRxDownload = rxDownload;
+            return this;
+        }*/
+
+        public Builder updateStatus(boolean b) {
+            this.isUpdateStatus = b;
+            return this;
         }
 
     }

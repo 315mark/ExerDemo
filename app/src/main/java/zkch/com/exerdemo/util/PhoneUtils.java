@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * <pre>
@@ -396,4 +397,15 @@ public final class PhoneUtils {
             e.printStackTrace();
         }
     }
+
+    public static boolean matcherPhoneNum(String value) {
+        String regex = "^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$";
+        return testRegex(regex, value);
+    }
+
+    public static boolean testRegex(String regex, String inputValue) {
+        return Pattern.compile(regex).matcher(inputValue).matches();
+    }
+
+
 }

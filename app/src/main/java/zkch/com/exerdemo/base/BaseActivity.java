@@ -17,6 +17,7 @@ import io.reactivex.disposables.Disposable;
 import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
 import zkch.com.exerdemo.cniaow.mvp.presenter.BasePresenter;
+import zkch.com.exerdemo.cniaow.ui.BaseView;
 import zkch.com.exerdemo.util.JumpUtils;
 import zkch.com.exerdemo.util.KeyboardUtils;
 
@@ -25,13 +26,13 @@ import zkch.com.exerdemo.util.KeyboardUtils;
  * 基础Activity   封装RxBinding
  * 实例化的Disposable需在不用时及时销毁
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
     public CompositeDisposable mCompositeDisposable;
     protected AppApplication mApp;
     private Unbinder bind;
 
     @Inject
-    T mPresenter;
+    public T mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +79,33 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
+    }
+
+
+    /**
+     * 显示进度对话框
+     */
+    @Override
+    public void showLoading() {
+
+    }
+
+    /**
+     * 关闭进度对话框
+     */
+    @Override
+    public void dismissLoading() {
+
+    }
+
+    /**
+     * 显示错误信息
+     *
+     * @param displayMessage
+     */
+    @Override
+    public void showError(String displayMessage) {
+
     }
 
     /**

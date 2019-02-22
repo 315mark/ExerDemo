@@ -30,7 +30,7 @@ public class CategoryAppFragment extends BaseAppInfoFragment {
 
     @Override
     protected AppInfoAdapter buildAdater() {
-        return AppInfoAdapter.build().showPosition(false)
+        return AppInfoAdapter.builder().showPosition(false)
                 .showBrief(true).showCategoryName(false).build();
     }
 

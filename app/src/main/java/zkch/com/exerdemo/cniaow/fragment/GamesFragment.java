@@ -16,7 +16,7 @@ public class GamesFragment extends BaseAppInfoFragment {
 
     @Override
     protected AppInfoAdapter buildAdater() {
-        return AppInfoAdapter.build().showPosition(true).showBrief(false)
+        return AppInfoAdapter.builder().showPosition(true).showBrief(false)
                 .showCategoryName(true).build();
     }
 

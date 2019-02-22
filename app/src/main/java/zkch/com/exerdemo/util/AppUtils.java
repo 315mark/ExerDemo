@@ -17,6 +17,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import zkch.com.exerdemo.common.apkparest.AndroidApk;
+
 /**
  * <pre>
  *     author: Blankj
@@ -45,6 +47,46 @@ public final class AppUtils {
         ResolveInfo info = pm.resolveActivity(intent, 0);
         return info != null;
     }
+
+    public static List<AndroidApk> getInstalledApps(Context context) {
+        PackageManager pm = context.getPackageManager();
+
+        List<PackageInfo> packageInfos = pm.getInstalledPackages(PackageManager.MATCH_UNINSTALLED_PACKAGES);
+
+        List<AndroidApk> apks = new ArrayList<>(packageInfos.size());
+
+        for (PackageInfo info : packageInfos) {
+
+
+            AndroidApk apk = new AndroidApk();
+
+            apk.setPackageName(info.packageName);
+
+            apk.setAppVersionCode(info.versionCode + "");
+            apk.setAppVersionName(info.versionName);
+            apk.setLastUpdateTime(info.lastUpdateTime);
+
+
+            ApplicationInfo applicationInfo = info.applicationInfo;
+
+            if (applicationInfo != null) {
+
+
+                apk.setApkPath(applicationInfo.sourceDir);
+                apk.setAppName(applicationInfo.loadLabel(pm).toString());
+                apk.setDrawable(applicationInfo.loadIcon(pm));
+
+
+                apk.setSystem((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) > 0);
+            }
+
+            apks.add(apk);
+
+        }
+        return apks;
+
+    }
+
 
     /**
      * 判断App是否安装
@@ -510,13 +552,13 @@ public final class AppUtils {
      */
     public static class AppInfo {
 
-        private String   name;
+        private String name;
         private Drawable icon;
-        private String   packageName;
-        private String   packagePath;
-        private String   versionName;
-        private int      versionCode;
-        private boolean  isSystem;
+        private String packageName;
+        private String packagePath;
+        private String versionName;
+        private int versionCode;
+        private boolean isSystem;
 
         public Drawable getIcon() {
             return icon;

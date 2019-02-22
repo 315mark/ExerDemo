@@ -2,12 +2,17 @@ package zkch.com.exerdemo.cniaow.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,13 +32,18 @@ import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.adapter.ViewPagerAdapter;
 import zkch.com.exerdemo.cniaow.bean.User;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.component.DaggerMainComponent;
+import zkch.com.exerdemo.cniaow.mvp.contract.MainContract;
+import zkch.com.exerdemo.cniaow.mvp.module.MainModule;
+import zkch.com.exerdemo.cniaow.mvp.presenter.SimplePresenter;
 import zkch.com.exerdemo.common.ACache;
 import zkch.com.exerdemo.common.constant.Constant;
 import zkch.com.exerdemo.typeface.AliFont;
 import zkch.com.exerdemo.util.PermissionUtils;
 import zkch.com.exerdemo.util.ToastUtils;
+import zkch.com.exerdemo.widget.BadgeActionProvider;
 
-public class SimpleActivity extends BaseActivity {
+public class SimpleActivity extends BaseActivity<SimplePresenter> implements MainContract.MainView {
 
 
     @BindView(R.id.tab_layout)
@@ -52,6 +62,8 @@ public class SimpleActivity extends BaseActivity {
     private TextView mTextUserName;
     private View headerView;
 
+    private BadgeActionProvider badgeActionProvider;
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_simple;
@@ -61,17 +73,21 @@ public class SimpleActivity extends BaseActivity {
     @Override
     protected void init() {
         RxBus.get().register(this);
+        //此方法可抽取到Presenter层
         PermissionUtils.requestPermisson(this, Manifest.permission.READ_PHONE_STATE)
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         initDrawerLayout();
                         initTLabayout();
-                        //  initUser();
+                        initToolbar();
+                        initUser();
                     } else {
                         ToastUtils.showShort("请设置权限");
                     }
                 });
 
+//        mPresenter.requestPermisson();
+        mPresenter.getAppUpdateInfo();
     }
 
 
@@ -81,9 +97,7 @@ public class SimpleActivity extends BaseActivity {
         if (user == null) {
             addDisposable(RxView.clicks(headerView)
                     .throttleFirst(2, TimeUnit.SECONDS) //防重复点击
-                    .subscribe(o -> {
-                        //  startActivity(new Intent(this, LoginActivity.class));
-                    })
+                    .subscribe(o -> startActivity(new Intent(this, LoginActivity.class)))
             );
         } else {
 
@@ -93,6 +107,9 @@ public class SimpleActivity extends BaseActivity {
 
     }
 
+    /**
+     * 退出登录
+     */
     private void logout() {
         ACache aCache = ACache.get(this);
         aCache.put(Constant.TOKEN, "");
@@ -101,12 +118,12 @@ public class SimpleActivity extends BaseActivity {
         mUserHeadView.setImageDrawable(new IconicsDrawable(this, AliFont.Icon.cniao_head).colorRes(R.color.white));
         mTextUserName.setText("未登录");
         headerView.setOnClickListener(v -> {
-            //   startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(SimpleActivity.this, LoginActivity.class));
         });
-
 
     }
 
+    //设置头像
     private void initUserHeadView(User user) {
         //Glide对网络请求的图片进行处理
         Glide.with(this).load(user.getLogo_url()).apply(RequestOptions.circleCropTransform()).into(mUserHeadView);
@@ -160,15 +177,37 @@ public class SimpleActivity extends BaseActivity {
      * ActionBarDrawerToggle TooolBar+ DrawerLayout 实现侧滑按钮
      */
     private void initTLabayout() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void initToolbar() {
         mToolbar.inflateMenu(R.menu.menu_toolbar);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close);
         //同步状态
         actionBarDrawerToggle.syncState();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+
+        MenuItem downloadItem = mToolbar.getMenu().findItem(R.id.action_download);
+        MenuItem searchItem = mToolbar.getMenu().findItem(R.id.action_search);
+        badgeActionProvider = (BadgeActionProvider) MenuItemCompat.getActionProvider(downloadItem);
+        badgeActionProvider.setIcon(DrawableCompat.wrap(new IconicsDrawable(this, AliFont.Icon.cniao_download).color(ContextCompat.getColor(this, R.color.white))));
+        badgeActionProvider.setOnClickListener(v -> toAPPManagerActivity(badgeActionProvider.getBadgeNum() > 0 ? 2 : 0));
+        searchItem.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_search) {
+                startActivity(new Intent(SimpleActivity.this, SearchActivity.class));
+            }
+            return false;
+        });
     }
+
+    private void toAPPManagerActivity(int position) {
+        Intent intent = new Intent(SimpleActivity.this, AppManagerActivity.class);
+        intent.putExtra(Constant.POSITION, position);
+        startActivity(new Intent(intent));
+    }
+
 
     /**
      * 注入  DaggerLoginComponent
@@ -177,7 +216,8 @@ public class SimpleActivity extends BaseActivity {
      */
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-
+        DaggerMainComponent.builder().appComponent(appComponent)
+                .mainModule(new MainModule(this)).build().inject(this);
     }
 
     @Override
@@ -185,5 +225,25 @@ public class SimpleActivity extends BaseActivity {
         super.onDestroy();
         RxBus.get().unregister(this);
     }
+
+    @Override
+    public void requestPermisSuccess() {
+        //权限请求成功 再此处执行init操作
+    }
+
+    @Override
+    public void requestPermisFail() {
+
+    }
+
+    @Override
+    public void changeAppUpdateCount(int count) {
+        if (count > 0) {
+            badgeActionProvider.setText(count + "");
+        } else {
+            badgeActionProvider.hideBadge();  //隐藏
+        }
+    }
+
 
 }

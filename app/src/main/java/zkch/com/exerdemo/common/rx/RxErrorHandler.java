@@ -1,6 +1,5 @@
 package zkch.com.exerdemo.common.rx;
 
-
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 
@@ -27,33 +26,33 @@ public class RxErrorHandler {
     }
 
     /**
-     *  异常处理方法
+     * 异常处理方法
      */
-    public BaseException handlerError(Throwable e){
-        BaseException exception =new BaseException();
+    public BaseException handlerError(Throwable e) {
+        BaseException exception = new BaseException();
         if (e instanceof ApiException) {
             exception.setCode(((ApiException) e).getCode());
-        }else if (e instanceof SocketException) {
+        } else if (e instanceof SocketException) {
             exception.setCode(BaseException.SOCKET_ERROR);
-        }else if (e instanceof SocketTimeoutException) {
+        } else if (e instanceof SocketTimeoutException) {
             exception.setCode(BaseException.SOCKET_TIMEOUT_ERROR);
-        }else if (e instanceof JsonParseException) {
+        } else if (e instanceof JsonParseException) {
             exception.setCode(BaseException.JSON_ERROR);
-        }else if (e instanceof HttpException) {
+        } else if (e instanceof HttpException) {
             exception.setCode(BaseException.HTTP_ERROR);
-        }else if (e instanceof NetworkErrorException) {
+        } else if (e instanceof NetworkErrorException) {
             exception.setCode(BaseException.NETWORD_ERROR);
-        }else{
+        } else {
             exception.setCode(BaseException.UNKNOWN_ERROR);
         }
-        exception.setDisplayMsg(ErrorMessageFactory.create(mContext,exception.getCode()));
+        exception.setDisplayMsg(ErrorMessageFactory.create(mContext, exception.getCode()));
         return exception;
     }
 
     /**
-     *  显示错误信息
+     * 显示错误信息
      */
-    public void  showErrorMsg(BaseException e){
+    public void showErrorMsg(BaseException e) {
         ToastUtils.showShort(e.getDisplayMsg());
     }
 

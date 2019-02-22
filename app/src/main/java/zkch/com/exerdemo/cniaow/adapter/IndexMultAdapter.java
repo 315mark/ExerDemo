@@ -130,7 +130,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             case 2:    //热门应用 //热门游戏
                 AppViewHolder appViewHolder = (AppViewHolder) holder;
-                AppInfoAdapter appInfoAdapter = AppInfoAdapter.build().showPosition(false)
+                AppInfoAdapter appInfoAdapter = AppInfoAdapter.builder().showPosition(false)
                         .showCategoryName(true)
                         .showBrief(false)
                         .build();

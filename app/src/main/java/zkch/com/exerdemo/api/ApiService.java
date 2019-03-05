@@ -1,6 +1,5 @@
 package zkch.com.exerdemo.api;
 
-
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -23,22 +22,17 @@ import zkch.com.exerdemo.cniaow.bean.SubjectDetail;
 public interface ApiService {
 
     // TODO: BASE_URL
-    public static final String BASE_URL = "http://112.124.22.238:8081/course_api/cniaoplay/";
-    // TODO: BASE_IMGURL
-//    public static final String BASE_IMG_URL = "http://file.market.xiaomi.com/mfc/thumbnail/png/w150q80/";
-    String BASE_IMG_URL = "http://file.market.xiaomi.com/mfc/thumbnail/png/w150q80/";
-
-//    public Call<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
+    String BASE_URL = "http://112.124.22.238:8081/course_api/cniaoplay/";
 
     @GET("featured2")
     Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
 
     @GET("index")
-    public Observable<BaseBean<IndexBean>> index();
+    Observable<BaseBean<IndexBean>> index();
 
     // TODO: topList
     @GET("toplist")
-    public Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
+    Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
 
     @GET("game")
     Observable<BaseBean<PageBean<AppInfo>>> game(@Query("page") int page);
@@ -47,10 +41,8 @@ public interface ApiService {
     @POST("login")
     Observable<BaseBean<LoginBean>> login(@Body LoginRequestBean param);
 
-    //
     @GET("category")
     Observable<BaseBean<List<Category>>> getCategories();
-
 
     /**
      * Category

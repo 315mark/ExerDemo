@@ -22,11 +22,6 @@ public interface AppInfoContract {
         void showResult(IndexBean indexBean);
 
         /**
-         * 数据为空
-         */
-        void showNodata();
-
-        /**
          * 数据加载错误 view
          *
          * @param msg

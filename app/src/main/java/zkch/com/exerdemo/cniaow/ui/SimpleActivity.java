@@ -24,13 +24,20 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.adapter.ViewPagerAdapter;
+import zkch.com.exerdemo.cniaow.bean.FragmentInfo;
 import zkch.com.exerdemo.cniaow.bean.User;
+import zkch.com.exerdemo.cniaow.fragment.CategoryFragment;
+import zkch.com.exerdemo.cniaow.fragment.GamesFragment;
+import zkch.com.exerdemo.cniaow.fragment.RecommendFragment;
+import zkch.com.exerdemo.cniaow.fragment.TopListFragment;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
 import zkch.com.exerdemo.cniaow.mvp.component.DaggerMainComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.MainContract;
@@ -177,9 +184,18 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
      * ActionBarDrawerToggle TooolBar+ DrawerLayout 实现侧滑按钮
      */
     private void initTLabayout() {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), initFragment());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private List<FragmentInfo> initFragment() {
+        List<FragmentInfo> mFragments = new ArrayList<>();
+        mFragments.add(new FragmentInfo("推荐", RecommendFragment.class));
+        mFragments.add(new FragmentInfo("排行", TopListFragment.class));
+        mFragments.add(new FragmentInfo("游戏", GamesFragment.class));
+        mFragments.add(new FragmentInfo("分类", CategoryFragment.class));
+        return mFragments;
     }
 
     private void initToolbar() {

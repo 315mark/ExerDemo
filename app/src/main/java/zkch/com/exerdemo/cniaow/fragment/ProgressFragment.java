@@ -42,7 +42,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     CompositeDisposable mCompositeDisposable;
 
     @Inject
-    T mPresenter;
+    public T mPresenter;
 
     @Nullable
     @Override

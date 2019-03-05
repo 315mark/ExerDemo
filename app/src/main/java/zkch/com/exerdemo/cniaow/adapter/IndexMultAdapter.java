@@ -1,6 +1,7 @@
 package zkch.com.exerdemo.cniaow.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,13 +26,14 @@ import butterknife.ButterKnife;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.Banner;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
+import zkch.com.exerdemo.cniaow.ui.SubjectActivity;
 import zkch.com.exerdemo.util.LogUtils;
 import zkch.com.exerdemo.widget.BannerLayout;
 
 /**
  * 多类型RecyleView 复用
  */
-public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     public static final int TYPE_BANNER = 1;
     private static final int TYPE_ICON = 2;
     private static final int TYPE_APPS = 3;
@@ -125,7 +127,9 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             case 1:    //热门主题
                 NavIconViewHolder iconViewHolder = (NavIconViewHolder) holder;
-
+                iconViewHolder.layoutHotApps.setOnClickListener(this);
+                iconViewHolder.layoutHotGame.setOnClickListener(this);
+                iconViewHolder.layoutHotSubject.setOnClickListener(this);
                 break;
 
             case 2:    //热门应用 //热门游戏
@@ -162,6 +166,21 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return 4;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.layout_hot_apps:
+                break;
+
+            case R.id.layout_hot_game:
+                break;
+
+            case R.id.layout_hot_subject:
+                mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+                break;
+        }
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {

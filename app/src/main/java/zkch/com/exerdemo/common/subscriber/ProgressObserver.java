@@ -16,7 +16,11 @@ public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
 
     @Override
     public void onError(Throwable e) {
-        super.onError(e);
+
+        e.printStackTrace();
+        BaseException baseException = mErrorHandler.handlerError(e);
+        mBaseView.showError(baseException.getDisplayMsg());
+       /* super.onError(e);
         if (e != null) {
             BaseException baseException = mErrorHandler.handlerError(e);
             if (e.getMessage().equals("permission disgranted")) {
@@ -24,7 +28,7 @@ public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
             } else {
                 mBaseView.showError(baseException.getDisplayMsg());
             }
-        }
+        }*/
     }
 
     @Override

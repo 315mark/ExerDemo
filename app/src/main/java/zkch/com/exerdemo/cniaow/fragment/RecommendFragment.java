@@ -1,5 +1,6 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
+import android.app.ProgressDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +16,6 @@ import zkch.com.exerdemo.cniaow.mvp.component.DaggerRecommendComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.module.RecommendModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.RecommendPresenter;
-import zkch.com.exerdemo.util.ToastUtils;
 
 /**
  * 推荐页面   多类型item 可从View层下手
@@ -25,12 +25,11 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @BindView(R.id.recyleView)
     RecyclerView recyleView;
 
-    @Inject
-    RecommendPresenter presenter;
-
     //Adapter 适配器
     private IndexMultAdapter adapter;
 
+    @Inject
+    ProgressDialog progressDialog;
 
     @Override
     protected void init() {
@@ -38,7 +37,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     }
 
     private void initData() {
-        presenter.requestDatas();
+        mPresenter.requestDatas();
     }
 
     @Override
@@ -53,6 +52,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     private void initRecycleView() {
         // 设置布局管理器
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)
+        //rvRecommend.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
+        //动画
         recyleView.setItemAnimator(new DefaultItemAnimator());
         adapter = new IndexMultAdapter(getActivity());
         recyleView.setAdapter(adapter);
@@ -77,8 +79,4 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         initData();
     }
 
-    @Override
-    public void showNodata() {
-        ToastUtils.showShort("没有数据");
-    }
 }

@@ -1,6 +1,5 @@
 package zkch.com.exerdemo.cniaow.model;
 
-import dagger.Module;
 import io.reactivex.Observable;
 import zkch.com.exerdemo.api.ApiService;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
@@ -11,7 +10,7 @@ import zkch.com.exerdemo.cniaow.bean.PageBean;
 /**
  * 推荐页面的 Model  负责提供接口  Presenter 负责处理
  */
-@Module
+
 public class AppInfoModel {
 
     private ApiService apiService;

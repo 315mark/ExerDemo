@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import zkch.com.exerdemo.BuildConfig;
 import zkch.com.exerdemo.api.ApiService;
 import zkch.com.exerdemo.common.http.CommonParamsIntercepter;
+import zkch.com.exerdemo.common.rx.RxErrorHandler;
 
 /**
  * 封装单例模式OKHTTP网络请求
@@ -59,6 +60,12 @@ public class HttpModule {
     @Singleton
     public ApiService provideApiService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    public RxErrorHandler provideRxErrorHandler(Application application) {
+        return new RxErrorHandler(application);
     }
 
 

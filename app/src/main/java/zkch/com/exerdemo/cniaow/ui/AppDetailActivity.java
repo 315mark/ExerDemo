@@ -10,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,11 @@ import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.fragment.AppDetailFragment;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.presenter.AppDetailPresenter;
 import zkch.com.exerdemo.common.constant.Constant;
 import zkch.com.exerdemo.util.DensityUtil;
 
-public class AppDetailActivity extends BaseActivity {
+public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
 
     @BindView(R.id.view_temp)
     View viewTemp;
@@ -50,6 +52,9 @@ public class AppDetailActivity extends BaseActivity {
     @BindView(R.id.view_coordinator)
     CoordinatorLayout viewCoordinator;
 
+    @BindView(R.id.detail_nested_scrollview)
+    NestedScrollView detailNestedScrollview;
+
     private AppInfo mAppInfo;
 
     @Override
@@ -59,15 +64,23 @@ public class AppDetailActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        mAppInfo = (AppInfo) getIntent().getSerializableExtra("appinfo");
+        mAppInfo = (AppInfo) getIntent().getSerializableExtra(Constant.APPINFO);
         Glide.with(this).load(Constant.BASE_IMG_URL + mAppInfo.getIcon()).into(imgIcon);
+
+        txtName.setText(mAppInfo.getDisplayName());
 
         toolbar.setNavigationIcon(new IconicsDrawable(this).icon(Ionicons.Icon.ion_ios_arrow_back)
                 .sizeDp(16).color(getResources().getColor(R.color.md_white_1000)));
 
         toolbar.setNavigationOnClickListener(v -> finish());
 
+        detailNestedScrollview.scrollTo(0, 0);
         //TODO 获取传递视图
+        initView();
+    }
+
+    private void initView() {
+
         View view = mApp.getmView();
         Bitmap bitmapCache = getViewImageCache(view);
         if (bitmapCache != null) {
@@ -85,9 +98,12 @@ public class AppDetailActivity extends BaseActivity {
         params.leftMargin = left;
         params.width = view.getWidth();
         params.height = view.getHeight();
+
         LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(params);
         viewTemp.setLayoutParams(linearParams);
-        open();
+
+        //  open();
+
     }
 
     //开启动画
@@ -97,7 +113,7 @@ public class AppDetailActivity extends BaseActivity {
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation, boolean isReverse) {
-//                viewContent.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
+                viewContent.setBackgroundColor(getResources().getColor(R.color.md_white_1000));
             }
 
             @Override
@@ -107,8 +123,8 @@ public class AppDetailActivity extends BaseActivity {
                 initFragment();
             }
         });
-        animator.setDuration(1000);
         animator.setStartDelay(500);
+        animator.setDuration(1000);
         animator.start();
     }
 
@@ -116,13 +132,12 @@ public class AppDetailActivity extends BaseActivity {
         AppDetailFragment fragment = new AppDetailFragment(mAppInfo.getId());
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.add(R.id.view_content, fragment);
         transaction.add(R.id.view_content, fragment);
         transaction.commitAllowingStateLoss();
     }
 
 
-    //TODO 设置图片缓存
+    //TODO 获取缓存图片
     private Bitmap getViewImageCache(View view) {
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();

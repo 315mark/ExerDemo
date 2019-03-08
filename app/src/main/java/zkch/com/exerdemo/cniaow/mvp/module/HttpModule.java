@@ -1,13 +1,9 @@
 package zkch.com.exerdemo.cniaow.mvp.module;
 
 import android.app.Application;
-
 import com.google.gson.Gson;
-
 import java.util.concurrent.TimeUnit;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -23,6 +19,7 @@ import zkch.com.exerdemo.common.rx.RxErrorHandler;
 /**
  * 封装单例模式OKHTTP网络请求
  */
+@Singleton
 @Module
 public class HttpModule {
 
@@ -39,6 +36,8 @@ public class HttpModule {
         }
 
         //网络拦截器
+        // HeadInterceptor实现了Interceptor，用来往Request Header添加一些业务相关数据，
+        // 如APP版本，token信息 .addInterceptor(new HeadInterceptor())
         return builder.connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(new CommonParamsIntercepter(application, gson))

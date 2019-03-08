@@ -11,12 +11,12 @@ public abstract class ProgressDialogObserver<T> extends ErrorHandlerObserver<T> 
     private Disposable mDisposable;
 
 
-    public ProgressDialogObserver(Context context) {
+    protected ProgressDialogObserver(Context context) {
         super(context);
         mHandler = new ProgressDialogHandler(context);
     }
 
-    protected boolean isShowProgressDialog() {
+    private boolean isShowProgressDialog() {
         return true;
     }
 

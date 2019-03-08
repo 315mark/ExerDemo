@@ -11,7 +11,7 @@
     app:indicatorShape="oval"
     app:indicatorSpace="3dp"
     app:scrollDuration="1100"
-    app:selectedIndicatorColor="?attr/colorPrimary"
+    app:selectedIndicatorColor="@color/bg_orange_ff7e2a"
     app:selectedIndicatorHeight="6dp"
     app:selectedIndicatorWidth="6dp"
     app:unSelectedIndicatorColor="#99ffffff"

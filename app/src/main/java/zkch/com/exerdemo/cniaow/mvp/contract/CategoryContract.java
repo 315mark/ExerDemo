@@ -7,13 +7,13 @@ import zkch.com.exerdemo.cniaow.bean.BaseBean;
 import zkch.com.exerdemo.cniaow.bean.Category;
 import zkch.com.exerdemo.cniaow.ui.BaseView;
 
-public interface CategoryContract {
-    interface ICategoryModel {
+public class CategoryContract {
+    public interface ICategoryModel {
         Observable<BaseBean<List<Category>>> getCategories();
     }
 
-    interface CategoryView extends BaseView {
-        public void showData(List<Category> categories);
+    public interface CategoryView extends BaseView {
+        void showData(List<Category> categories);
     }
 
 

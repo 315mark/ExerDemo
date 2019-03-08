@@ -64,7 +64,6 @@
                 android:text="{ion-ios-download}"
                 android:textSize="40dp" />
 
-
         </RelativeLayout>
 
 

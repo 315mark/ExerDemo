@@ -11,24 +11,25 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
-import zkch.com.exerdemo.util.LogUtils;
 
 /**
  * 采用Builder 构造者模式 复用item
  */
 public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
     private Builder mBuilder;
-    String baseImgUrl = "http://file.market.xiaomi.com/mfc/thumbnail/png/w150q80/";
+    private String baseImgUrl = "http://file.market.xiaomi.com/mfc/thumbnail/png/w150q80/";
 
-    public AppInfoAdapter(Builder builder) {
-        super(R.layout.template_appinfo);
+    private AppInfoAdapter(Builder builder) {
+        super(builder.layoutId);
         this.mBuilder = builder;
+        //TODO  缺少下载控制
+        openLoadAnimation();
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void convert(BaseViewHolder helper, AppInfo item) {
-        LogUtils.i(getClass().getName(), "执行到此 ");
+
         Glide.with(mContext).load(baseImgUrl + item.getIcon()).into((ImageView) helper.getView(R.id.img_app_icon));
         helper.setText(R.id.txt_app_name, item.getDisplayName())
                 .setText(R.id.txt_brief, item.getBriefShow());
@@ -56,7 +57,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
 
         private int layoutId = R.layout.template_appinfo;
         private boolean isUpdateStatus;
-        //RxDownload
+        // TODO RxDownload
         // private RxDownload mRxDownload;
 
         public Builder showBrief(boolean b) {

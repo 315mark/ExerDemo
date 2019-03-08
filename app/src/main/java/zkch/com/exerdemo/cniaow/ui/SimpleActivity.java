@@ -260,6 +260,4 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
             badgeActionProvider.hideBadge();  //隐藏
         }
     }
-
-
 }

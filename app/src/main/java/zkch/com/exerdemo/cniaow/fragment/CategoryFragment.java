@@ -62,7 +62,8 @@ public class CategoryFragment extends ProgressFragment<CategoryPresenter> implem
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
         DaggerCategoryComponent.builder().appComponent(appComponent)
-                .categoryModule(new CategoryModule(this)).build();
+                .categoryModule(new CategoryModule(this))
+                .build().inject(this);
     }
 
     @Override

@@ -49,8 +49,8 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
                 }
             };
         } else {
+            //加载更多
             observer = new ErrorHandlerObserver<PageBean<AppInfo>>(mContext) {
-
                 @Override
                 public void onNext(PageBean<AppInfo> appInfoPageBean) {
                     mView.showResult(appInfoPageBean);

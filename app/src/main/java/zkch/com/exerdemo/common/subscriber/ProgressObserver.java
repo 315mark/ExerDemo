@@ -9,7 +9,7 @@ import zkch.com.exerdemo.common.exception.BaseException;
 public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
     private BaseView mBaseView;
 
-    public ProgressObserver(Context context, BaseView mView) {
+    protected ProgressObserver(Context context, BaseView mView) {
         super(context);
         this.mBaseView = mView;
     }
@@ -43,7 +43,7 @@ public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
         mBaseView.dismissLoading();
     }
 
-    public boolean isShowProgress() {
+    private boolean isShowProgress() {
         return true;
     }
 

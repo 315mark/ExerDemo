@@ -17,12 +17,13 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.ICategoryM
     }
 
     public void getAllCategory() {
-        mModel.getCategories().compose(RxHttpReponseCompat.compatResult()).subscribe(new ProgressObserver<List<Category>>(mContext, mView) {
-            @Override
-            public void onNext(List<Category> categories) {
-                mView.showData(categories);
-            }
-        });
+        mModel.getCategories().compose(RxHttpReponseCompat.compatResult())
+                .subscribe(new ProgressObserver<List<Category>>(mContext, mView) {
+                    @Override
+                    public void onNext(List<Category> categories) {
+                        mView.showData(categories);
+                    }
+                });
     }
 
 

@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
-
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.base.BaseActivity;

@@ -14,6 +14,7 @@ public class Constant {
 
     public static final String IS_SHOW_GUIDE = "is_show_guide";
 
+    //公共参数
     public static final String MODEL = "model";
     public static final String IMEI = "imei";
     public static final String LANGUAGE = "la";

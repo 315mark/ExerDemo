@@ -33,23 +33,19 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     protected void init() {
-        initData();
-    }
-
-    private void initData() {
         mPresenter.requestDatas();
     }
 
     @Override
     public void showResult(IndexBean indexBean) {
-        initRecycleView();
-        adapter.setData(indexBean);
+        initRecycleView(indexBean);
+        showContentView();
     }
 
     /**
      * 添加动画
      */
-    private void initRecycleView() {
+    private void initRecycleView(IndexBean indexBean) {
         // 设置布局管理器
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)
@@ -57,7 +53,21 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         //动画
         recyleView.setItemAnimator(new DefaultItemAnimator());
         adapter = new IndexMultAdapter(getActivity());
+        adapter.setData(indexBean);
         recyleView.setAdapter(adapter);
+
+       /* recyleView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                //存储视图
+                //  mApplication.setmView(view);
+                // Intent intent = new Intent(getActivity(), AppDetailActivity.class);
+                // adapter.getItem(position);
+                // intent.putExtra(APPINFO, appInfo);
+                //  startActivity(intent);
+            }
+        });
+         */
     }
 
     @Override
@@ -76,7 +86,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void onEmptyViewClick() {
-        initData();
+        mPresenter.requestDatas();
     }
 
 }

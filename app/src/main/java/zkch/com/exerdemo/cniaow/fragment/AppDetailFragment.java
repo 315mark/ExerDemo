@@ -78,7 +78,8 @@ public class AppDetailFragment extends ProgressFragment<AppDetailPresenter> impl
     protected void setupAcitivtyComponent(AppComponent appComponent) {
         DaggerAppDetailComponent.builder().appComponent(appComponent)
                 .appDetailModule(new AppDetailModule(this))
-                .appModelModule(new AppModelModule()).build().inject(this);
+                .appModelModule(new AppModelModule())
+                .build().inject(this);
     }
 
     @Override
@@ -90,7 +91,8 @@ public class AppDetailFragment extends ProgressFragment<AppDetailPresenter> impl
         txtVersion.setText(appInfo.getVersionName());
         txtPublisher.setText(appInfo.getPublisherName());
         txtPublisher2.setText(appInfo.getPublisherName());
-        AppInfoAdapter.builder().layout(R.layout.template_appinfo2).build();
+        mAdapter = AppInfoAdapter.builder()
+                .layout(R.layout.template_appinfo2).build();
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyView.setLayoutManager(manager);
@@ -99,7 +101,8 @@ public class AppDetailFragment extends ProgressFragment<AppDetailPresenter> impl
         recyView.setAdapter(mAdapter);
 
         ////////////////////////////////
-        mAdapter = AppInfoAdapter.builder().layout(R.layout.template_appinfo2).build();
+        mAdapter = AppInfoAdapter.builder()
+                .layout(R.layout.template_appinfo2).build();
         recyViewRelate.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         mAdapter.addData(appInfo.getRelateAppInfoList());
         recyViewRelate.setAdapter(mAdapter);

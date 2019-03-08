@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
@@ -18,6 +18,8 @@ import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 import zkch.com.exerdemo.cniaow.ui.AppDetailActivity;
 import zkch.com.exerdemo.widget.DividerItemDecoration;
+
+import static zkch.com.exerdemo.common.constant.Constant.APPINFO;
 
 public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter> implements
         AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
@@ -56,16 +58,17 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
         recyleView.setItemAnimator(new DefaultItemAnimator());
         recyleView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mAdapter = buildAdater();
+
         mAdapter.setOnLoadMoreListener(this, recyleView);
         recyleView.setAdapter(mAdapter);
-        recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
+        recyleView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
-            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 //存储视图
                 mApplication.setmView(view);
                 Intent intent = new Intent(getActivity(), AppDetailActivity.class);
                 AppInfo appInfo = mAdapter.getItem(position);
-                intent.putExtra("appinfo", appInfo);
+                intent.putExtra(APPINFO, appInfo);
                 startActivity(intent);
             }
         });
@@ -84,6 +87,5 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
     public void onLoadMoreComplete() {
         mAdapter.loadMoreComplete();
     }
-
 
 }

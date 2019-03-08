@@ -6,7 +6,6 @@ import zkch.com.exerdemo.cniaow.mvp.component.DaggerAppInfoComponent;
 import zkch.com.exerdemo.cniaow.mvp.module.AppInfoModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 
-
 public class TopListFragment extends BaseAppInfoFragment {
     @Override
     int type() {

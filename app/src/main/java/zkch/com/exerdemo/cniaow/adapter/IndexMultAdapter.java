@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,21 +22,23 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.Banner;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
 import zkch.com.exerdemo.cniaow.ui.SubjectActivity;
-import zkch.com.exerdemo.util.LogUtils;
 import zkch.com.exerdemo.widget.BannerLayout;
 
 /**
  * 多类型RecyleView 复用
  */
 public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
-    public static final int TYPE_BANNER = 1;
+
+    private static final int TYPE_BANNER = 1;
     private static final int TYPE_ICON = 2;
     private static final int TYPE_APPS = 3;
     private static final int TYPE_GAMES = 4;
+
     private final LayoutInflater mLayoutInflater;
 
     private IndexBean mIndexBean;
@@ -50,8 +51,6 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     /**
      * 获取Item的类型
-     *
-     * @return
      */
     @Override
     public int getItemViewType(int position) {
@@ -99,14 +98,14 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return new NavIconViewHolder(mLayoutInflater.inflate(R.layout.template_nav_icon, parent, false));
 
             case TYPE_APPS:
-                return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, parent, false), TYPE_APPS);
+                return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, null, false), TYPE_APPS);
 
             case TYPE_GAMES:
-                return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, parent, false), TYPE_GAMES);
+                return new AppViewHolder(mLayoutInflater.inflate(R.layout.template_recyleview_with_title, null, false), TYPE_GAMES);
+
+            default:
+                return null;
         }
-
-        return null;
-
     }
 
 
@@ -122,7 +121,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     urls.add(banner.getThumbnail());
                 }
                 bannerHolder.banner.setViewUrls(urls);
-                bannerHolder.banner.setOnBannerItemClickListener(position1 -> Log.i("AAA", "onItemClick: " + position1));
+                bannerHolder.banner.setOnBannerItemClickListener(position1 -> Timber.i("onItemClick: %s", position1));
                 break;
 
             case 1:    //热门主题
@@ -131,20 +130,21 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 iconViewHolder.layoutHotGame.setOnClickListener(this);
                 iconViewHolder.layoutHotSubject.setOnClickListener(this);
                 break;
-
-            case 2:    //热门应用 //热门游戏
+            case 2:
+            case 3:    //热门应用 //热门游戏
                 AppViewHolder appViewHolder = (AppViewHolder) holder;
-                AppInfoAdapter appInfoAdapter = AppInfoAdapter.builder().showPosition(false)
-                        .showCategoryName(true)
-                        .showBrief(false)
+                AppInfoAdapter appInfoAdapter = AppInfoAdapter.builder()
+                        .showBrief(true)
+                        .showPosition(false)
+                        .showCategoryName(false)
                         .build();
                 if (appViewHolder.type == TYPE_APPS) {
                     appViewHolder.text.setText("热门应用");
-                    LogUtils.i(getClass().getName(), mIndexBean.getRecommendApps());
+                    appViewHolder.text.setTextColor(mContext.getResources().getColor(R.color.md_pink_A700));
                     appInfoAdapter.addData(mIndexBean.getRecommendApps());
                 } else {
                     appViewHolder.text.setText("热门游戏");
-                    LogUtils.i(getClass().getName(), mIndexBean.getRecommendGames());
+                    appViewHolder.text.setTextColor(mContext.getResources().getColor(R.color.md_red_A700));
                     appInfoAdapter.addData(mIndexBean.getRecommendGames());
                 }
                 // TODO: set inner adapter
@@ -187,13 +187,14 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.banner)
         BannerLayout banner;
 
-        public BannerViewHolder(View itemView) {
+        BannerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             banner.setImageLoader(new ImgLoader());
         }
     }
 
+    //加载图片
     class ImgLoader implements BannerLayout.ImageLoader {
         @Override
         public void displayImage(Context context, String path, ImageView imageView) {
@@ -209,7 +210,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         private final int type;
 
-        public AppViewHolder(View view, int typeApps) {
+        AppViewHolder(View view, int typeApps) {
             super(view);
             ButterKnife.bind(this, view);
             this.type = typeApps;
@@ -226,9 +227,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
             recyleView.addItemDecoration(itemDecoration);
         }
-
     }
-
 
     class NavIconViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.layout_hot_apps)
@@ -238,11 +237,9 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @BindView(R.id.layout_hot_subject)
         LinearLayout layoutHotSubject;
 
-        public NavIconViewHolder(View view) {
+        NavIconViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
-
-
 }

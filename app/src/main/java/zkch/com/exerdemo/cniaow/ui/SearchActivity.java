@@ -64,6 +64,9 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @BindView(R.id.recycler_view_result)
     RecyclerView recyclerViewResult;
 
+//    @Inject
+//    RxDownload rxDownload;
+
     //Adapter适配器
     private SearchHistoryAdapter mHistoryAdapter;
     private SuggestionAdapter mSuggestionAdapter;
@@ -108,7 +111,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
     private void initSearchResultRecyView() {
         //TODO  Adapter
-//        mAppAdapter = AppInfoAdapter.builder().showBrief(false)
+        mAppAdapter = AppInfoAdapter.builder().showBrief(false)
+                .showCategoryName(true).build();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerViewResult.setLayoutManager(manager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);

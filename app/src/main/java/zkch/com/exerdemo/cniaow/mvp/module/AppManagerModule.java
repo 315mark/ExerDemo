@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import zkch.com.exerdemo.cniaow.model.AppManagerModel;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppManagerContract;
+import zlc.season.rxdownload2.RxDownload;
 
 @Module
 public class AppManagerModule {
@@ -22,10 +23,9 @@ public class AppManagerModule {
         return mView;
     }
 
-    //TODO
 
     @Provides
-    public AppManagerContract.IAppManagerModel providerModel(Application application /*, RxDownload rxDownload*/) {
-        return new AppManagerModel(application);
+    public AppManagerContract.IAppManagerModel providerModel(Application application, RxDownload rxDownload) {
+        return new AppManagerModel(application, rxDownload);
     }
 }

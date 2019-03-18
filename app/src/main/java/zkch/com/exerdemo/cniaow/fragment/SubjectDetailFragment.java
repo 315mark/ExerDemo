@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.adapter.AppInfoAdapter;
@@ -15,6 +17,7 @@ import zkch.com.exerdemo.cniaow.bean.Subject;
 import zkch.com.exerdemo.cniaow.bean.SubjectDetail;
 import zkch.com.exerdemo.common.constant.Constant;
 import zkch.com.exerdemo.widget.DividerItemDecoration;
+import zlc.season.rxdownload2.RxDownload;
 
 @SuppressLint("ValidFragment")
 public class SubjectDetailFragment extends BaseSubjectFragment {
@@ -27,6 +30,8 @@ public class SubjectDetailFragment extends BaseSubjectFragment {
     @BindView(R.id.recyleView)
     RecyclerView recyleView;
 
+    @Inject
+    RxDownload rxDownload;
 
     private Subject subject;
     private AppInfoAdapter mAdapter;
@@ -56,8 +61,8 @@ public class SubjectDetailFragment extends BaseSubjectFragment {
     }
 
     private void inintRecyclerView() {
-        //TODO  缺少RxDownLoad()
-        mAdapter = new AppInfoAdapter.Builder()
+
+        mAdapter = new AppInfoAdapter.Builder().rxDownload(rxDownload)
                 .showBrief(false).showCategoryName(true).build();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyleView.setLayoutManager(layoutManager);

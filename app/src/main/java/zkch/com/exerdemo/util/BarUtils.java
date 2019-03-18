@@ -10,10 +10,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -35,10 +32,10 @@ public final class BarUtils {
     // status bar
     ///////////////////////////////////////////////////////////////////////////
 
-    private static final int    DEFAULT_ALPHA = 112;
-    private static final String TAG_COLOR     = "TAG_COLOR";
-    private static final String TAG_ALPHA     = "TAG_ALPHA";
-    private static final int    TAG_OFFSET    = -123;
+    private static final int DEFAULT_ALPHA = 112;
+    private static final String TAG_COLOR = "TAG_COLOR";
+    private static final String TAG_ALPHA = "TAG_ALPHA";
+    private static final int TAG_OFFSET = -123;
 
     private BarUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

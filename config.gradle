@@ -49,8 +49,8 @@ ext {
             "dagger"              : "com.google.dagger:dagger:${android["dagger"]}",
             "dagger-compiler"     : "com.google.dagger:dagger-compiler:${android["dagger"]}",
             "rxbinding2"          : "com.jakewharton.rxbinding2:rxbinding:${android["rxbinding2"]}",
+            "rxandroid"           : "io.reactivex.rxjava2:rxandroid:${android["rxbus"]}",
             "rxbus"               : "com.hwangjr.rxbus:rxbus:${android["rxbus"]}"
-
     ]
 
 

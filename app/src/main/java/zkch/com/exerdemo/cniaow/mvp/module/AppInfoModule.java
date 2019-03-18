@@ -6,7 +6,6 @@ import zkch.com.exerdemo.api.ApiService;
 import zkch.com.exerdemo.cniaow.model.AppInfoModel;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 
-
 @Module
 public class AppInfoModule {
     private AppInfoContract.AppInfoView mView;

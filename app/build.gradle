@@ -89,4 +89,6 @@ dependencies {
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
     //CoordinatorLayout协调子View之间进行交互动作 核心就 behavior
     implementation 'com.zoonref:simple-view-behavior:1.0'
+
+    implementation project(':rxdownload2')
 }

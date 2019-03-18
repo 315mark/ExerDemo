@@ -18,7 +18,7 @@ import zkch.com.exerdemo.cniaow.mvp.module.RecommendModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.RecommendPresenter;
 
 /**
- * 推荐页面   多类型item 可从View层下手
+ * 推荐页面  多类型item 可从View层下手
  */
 public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.RecyView {
 

@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import zkch.com.exerdemo.cniaow.bean.AppDownloadInfo;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.BaseBean;
 import zkch.com.exerdemo.cniaow.bean.Category;
@@ -73,5 +74,9 @@ public interface ApiService {
 
     @GET("search")
     Observable<BaseBean<SearchResult>> search(@Query("keyword") String keyword);
+
+    @GET("download/{id}")
+    Observable<BaseBean<AppDownloadInfo>> getAppDownloadInfo(@Path("id") int id);
+
 
 }

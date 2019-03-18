@@ -29,16 +29,18 @@ public class CategoryAppFragment extends BaseAppInfoFragment {
     }
 
     @Override
-    protected AppInfoAdapter buildAdater() {
+    public AppInfoAdapter buildAdater() {
         return AppInfoAdapter.builder().showPosition(false)
-                .showBrief(true).showCategoryName(false).build();
+                .showBrief(true).showCategoryName(false)
+                .rxDownload(mRxDownload)
+                .build();
     }
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
         DaggerAppInfoComponent.builder().appComponent(appComponent)
-                .appInfoModule(new AppInfoModule(this)).build()
-                .injectCategoryAppFragment(this);
+                .appInfoModule(new AppInfoModule(this))
+                .build().injectCategoryAppFragment(this);
 
     }
 }

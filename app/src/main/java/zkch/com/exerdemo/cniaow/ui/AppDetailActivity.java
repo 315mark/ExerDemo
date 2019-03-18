@@ -24,6 +24,7 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 
 import butterknife.BindView;
+import timber.log.Timber;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.base.BaseActivity;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
@@ -73,20 +74,15 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
                 .sizeDp(16).color(getResources().getColor(R.color.md_white_1000)));
 
         toolbar.setNavigationOnClickListener(v -> finish());
-
-        detailNestedScrollview.scrollTo(0, 0);
         //TODO 获取传递视图
         initView();
+
+        detailNestedScrollview.scrollTo(0, 0);
     }
 
     private void initView() {
 
         View view = mApp.getmView();
-        Bitmap bitmapCache = getViewImageCache(view);
-        if (bitmapCache != null) {
-            // setBackground不兼容 4.1一下版本 setbackgroundResources可以替代
-            viewTemp.setBackground(new BitmapDrawable(getResources(), bitmapCache));
-        }
 
         int[] location = new int[2];
         view.getLocationOnScreen(location);
@@ -102,7 +98,13 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
         LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(params);
         viewTemp.setLayoutParams(linearParams);
 
-        //  open();
+        Bitmap bitmapCache = getViewImageCache(view);
+        if (bitmapCache != null) {
+            // setBackground不兼容 4.1一下版本 setbackgroundResources可以替代
+            viewTemp.setBackground(new BitmapDrawable(getResources(), bitmapCache));
+        }
+
+        open();
 
     }
 
@@ -118,6 +120,7 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
 
             @Override
             public void onAnimationEnd(Animator animation, boolean isReverse) {
+                Timber.i(" 跳转动画 ");
                 viewTemp.setVisibility(View.GONE);
                 viewCoordinator.setVisibility(View.VISIBLE);
                 initFragment();

@@ -12,27 +12,29 @@ import zkch.com.exerdemo.common.ACache;
 import zkch.com.exerdemo.common.apkparest.AndroidApk;
 import zkch.com.exerdemo.common.constant.Constant;
 import zkch.com.exerdemo.common.utils.AppUtils;
+import zlc.season.rxdownload2.RxDownload;
+import zlc.season.rxdownload2.entity.DownloadRecord;
 
 public class AppManagerModel implements AppManagerContract.IAppManagerModel {
 
     private Context context;
-    //  private RxDownload rxDownload;
+    private RxDownload mRxDownload;
 
-    public AppManagerModel(Context context /*, RxDownload rxDownload*/) {
+    public AppManagerModel(Context context, RxDownload rxDownload) {
         this.context = context;
-        //  this.rxDownload = rxDownload;
+        this.mRxDownload = rxDownload;
     }
 
-    //TODO 缺少RXDownload 构造方法
-//    @Override
-//    public RxDownload getRxDownload() {
-//        return mRxDownload;
-//    }
-//
-//    @Override
-//    public Observable<List<DownloadRecord>> getDownloadRecord() {
-//        return mRxDownload.getTotalDownloadRecords();
-//    }
+    //RxDownload 构造方法
+    @Override
+    public RxDownload getRxDownload() {
+        return mRxDownload;
+    }
+
+    @Override
+    public Observable<List<DownloadRecord>> getDownloadRecord() {
+        return mRxDownload.getTotalDownloadRecords();
+    }
 
     @Override
     public Observable<List<AndroidApk>> getLocalApp() {

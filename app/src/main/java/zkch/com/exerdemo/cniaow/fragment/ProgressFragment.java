@@ -24,7 +24,6 @@ import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
 import zkch.com.exerdemo.cniaow.mvp.presenter.BasePresenter;
 import zkch.com.exerdemo.cniaow.ui.BaseView;
 
-
 /**
  * 打造带进度的Fragment 基类
  *

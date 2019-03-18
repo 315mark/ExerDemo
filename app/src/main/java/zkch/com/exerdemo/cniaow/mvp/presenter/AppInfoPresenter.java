@@ -35,7 +35,7 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
     }
 
     public void requestCategoryApps(int categoryId, int page, int flagType) {
-        request(CATEGORY, page, 0, 0);
+        request(CATEGORY, page, categoryId, flagType);
     }
 
     private void request(int type, int page, int categoryId, int flagType) {
@@ -63,14 +63,12 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
             };
         }
 
-        getObervable(type, page, categoryId, flagType)
+        getObervable(page, type, categoryId, flagType)
                 .compose(RxHttpReponseCompat.<PageBean<AppInfo>>compatResult())
                 .subscribe(observer);
     }
 
-    /**
-     *
-     */
+
     private Observable getObervable(int type, int page, int categoryId, int flagType) {
         switch (type) {
             case TOP_LIST:
@@ -92,6 +90,4 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
                 return Observable.empty();
         }
     }
-
-
 }

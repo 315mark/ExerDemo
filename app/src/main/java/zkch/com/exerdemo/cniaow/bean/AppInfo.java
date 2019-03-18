@@ -83,6 +83,16 @@ public class AppInfo extends BaseEntity {
     private List<AppInfo> sameDevAppInfoList;
     private String categoryId;
 
+    private AppDownloadInfo mAppDownloadInfo;
+
+    public AppDownloadInfo getAppDownloadInfo() {
+        return mAppDownloadInfo;
+    }
+
+    public void setAppDownloadInfo(AppDownloadInfo mAppDownloadInfo) {
+        this.mAppDownloadInfo = mAppDownloadInfo;
+    }
+
     /**
      * private AppDownloadInfo mAppDownloadInfo;
      * <p>

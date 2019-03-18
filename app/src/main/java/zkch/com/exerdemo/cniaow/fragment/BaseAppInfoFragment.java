@@ -1,13 +1,14 @@
 package zkch.com.exerdemo.cniaow.fragment;
 
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import zkch.com.exerdemo.R;
@@ -18,23 +19,26 @@ import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 import zkch.com.exerdemo.cniaow.ui.AppDetailActivity;
 import zkch.com.exerdemo.widget.DividerItemDecoration;
+import zlc.season.rxdownload2.RxDownload;
 
 import static zkch.com.exerdemo.common.constant.Constant.APPINFO;
 
-public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter> implements
-        AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
-
+public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresenter>
+        implements AppInfoContract.AppInfoView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.recyleView)
     RecyclerView recyleView;
 
-    AppInfoAdapter mAdapter;
+    @Inject
+    public RxDownload mRxDownload;
 
-    protected int page = 0;
+    private AppInfoAdapter mAdapter;
+
+    int page = 0;
 
     abstract int type();
 
-    protected abstract AppInfoAdapter buildAdater();
+    public abstract AppInfoAdapter buildAdater();
 
     @Override
     protected int setLayout() {
@@ -43,8 +47,8 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     @Override
     protected void init() {
-        mPresenter.requestData(type(), page);
         initRecyView();
+        mPresenter.requestData(type(), page);
     }
 
     @Override
@@ -55,7 +59,7 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
     protected void initRecyView() {
         //设置布局管理器
         recyleView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyleView.setItemAnimator(new DefaultItemAnimator());
+//        recyleView.setItemAnimator(new DefaultItemAnimator());
         recyleView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mAdapter = buildAdater();
 

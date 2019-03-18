@@ -92,7 +92,6 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
                         ToastUtils.showShort("请设置权限");
                     }
                 });
-
 //        mPresenter.requestPermisson();
         mPresenter.getAppUpdateInfo();
     }

@@ -34,6 +34,7 @@
                 android:layout_gravity="center"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:statusBarScrim="@color/md_purple_500"
                 app:titleEnabled="false">
 
                 <ImageView

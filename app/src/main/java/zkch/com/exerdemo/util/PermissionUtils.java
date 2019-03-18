@@ -31,7 +31,7 @@ import io.reactivex.disposables.Disposable;
 public final class PermissionUtils {
 
 
-    public static void readPhonestate(Activity activity){
+    public static void readPhonestate(Activity activity) {
 
         requestPermisson(activity, Manifest.permission.READ_PHONE_STATE).subscribe(new Observer<Boolean>() {
 
@@ -58,18 +58,18 @@ public final class PermissionUtils {
     }
 
 
-    public static Observable<Boolean> requestPermisson(Activity activity, String permission){
+    public static Observable<Boolean> requestPermisson(Context activity, String permission) {
 
         RxPermissions rxPermissions = new RxPermissions((FragmentActivity) activity);
 
         return rxPermissions.request(permission);
     }
 
-    public static ObservableTransformer<Object, Boolean> ensure(Activity activity, String permission){
+    public static ObservableTransformer<Object, Boolean> ensure(Activity activity, String permission) {
 
         RxPermissions rxPermissions = new RxPermissions((FragmentActivity) activity);
 
-        return  rxPermissions.ensure(permission);
+        return rxPermissions.ensure(permission);
 
     }
 

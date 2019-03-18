@@ -53,6 +53,7 @@
         <activity android:name=".cniaow.ui.SubjectActivity" />
         <activity android:name=".cniaow.ui.AppManagerActivity" />
         <activity android:name=".cniaow.ui.SettingActivity" />
+        <activity android:name=".cniaow.ui.WelcomeActivity" />
 
         <!-- 注册AccessibilityService -->
         <service

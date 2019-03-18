@@ -80,7 +80,9 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk, BaseViewHold
     }
 
     public Observable<Boolean> isInstalled(Context context, String packname) {
-        return Observable.create((ObservableOnSubscribe<Boolean>) emitter -> emitter.onNext(AppUtils.isInstalled(context, packname))).compose(RxSchedulers.io_mian());
+        return Observable.create((ObservableOnSubscribe<Boolean>)
+                emitter -> emitter.onNext(AppUtils.isInstalled(context, packname)))
+                .compose(RxSchedulers.io_mian());
     }
 
 }

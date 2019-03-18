@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.eftimoff.androipathview.PathView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.common.ACache;
 import zkch.com.exerdemo.common.constant.Constant;
@@ -27,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        pathView.getPathAnimator().delay(10).duration(5000).listenerStart(() -> Log.v("AppStore", "start")).listenerEnd(() -> {
-            Log.v("AppStore", "End");
+        pathView.getPathAnimator().delay(10).duration(5000).listenerStart(() ->
+                Timber.tag("AppStore").v("start")).listenerEnd(() -> {
+            Timber.tag("AppStore").v("End");
             jumpToMain();
         }).interpolator(new AccelerateDecelerateInterpolator()).start();
     }

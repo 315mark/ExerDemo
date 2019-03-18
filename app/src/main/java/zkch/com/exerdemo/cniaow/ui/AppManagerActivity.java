@@ -72,8 +72,6 @@ public class AppManagerActivity extends BaseActivity {
 
     /**
      * 设置Activity Component
-     *
-     * @param appComponent
      */
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {

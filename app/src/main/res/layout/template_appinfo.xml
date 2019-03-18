@@ -2,11 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
+    android:padding="20dp"
     android:background="@android:color/white"
     android:foreground="?android:attr/selectableItemBackground"
     android:gravity="center_vertical">
@@ -54,7 +52,15 @@
                 style="@style/Text_Title"
                 android:text="微信" />
 
-            <TextView
+            <zkch.com.exerdemo.widget.DownloadProgressButton
+                android:id="@+id/btn_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/download" />
+
+            <!-- 仿ios下载图标 <TextView
                 android:id="@+id/btn_download"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -62,10 +68,9 @@
                 android:layout_alignParentRight="true"
                 android:textColor="@color/md_grey_400"
                 android:text="{ion-ios-download}"
-                android:textSize="40dp" />
+                android:textSize="40dp" />-->
 
         </RelativeLayout>
-
 
         <TextView
             android:id="@+id/txt_category"
@@ -81,6 +86,31 @@
             android:text="社交"
             style="@style/Text_Content" />
 
+        <!-- 可折叠TextView -->
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/view_changelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:animDuration="200"
+            app:maxCollapsedLines="1">
+
+            <TextView
+                android:id="@+id/expandable_text"
+                style="@style/Text_Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@+id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:background="@color/transparent"
+                android:padding="16dp" />
+
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
 
     </LinearLayout>
 

@@ -32,8 +32,8 @@ public class CategoryAppFragment extends BaseAppInfoFragment {
     public AppInfoAdapter buildAdater() {
         return AppInfoAdapter.builder().showPosition(false)
                 .showBrief(true).showCategoryName(false)
-                .rxDownload(mRxDownload)
-                .build();
+                .rxDownload(mRxDownload).build();
+
     }
 
     @Override

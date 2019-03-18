@@ -7,7 +7,6 @@ import zkch.com.exerdemo.cniaow.fragment.TopListFragment;
 import zkch.com.exerdemo.cniaow.mvp.module.AppInfoModule;
 import zkch.com.exerdemo.cniaow.mvp.scope.ScopeFragment;
 
-
 @ScopeFragment
 @Component(modules = AppInfoModule.class, dependencies = AppComponent.class)
 public interface AppInfoComponent {

@@ -30,7 +30,7 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
     RecyclerView recyleView;
 
     @Inject
-    public RxDownload mRxDownload;
+    RxDownload mRxDownload;
 
     private AppInfoAdapter mAdapter;
 

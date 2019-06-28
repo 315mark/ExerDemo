@@ -21,7 +21,6 @@ import zkch.com.exerdemo.cniaow.ui.BaseView;
 import zkch.com.exerdemo.util.JumpUtils;
 import zkch.com.exerdemo.util.KeyboardUtils;
 
-
 /**
  * 基础Activity   封装RxBinding
  * 实例化的Disposable需在不用时及时销毁

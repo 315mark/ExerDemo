@@ -20,13 +20,13 @@ public abstract class ProgressObserver<T> extends ErrorHandlerObserver<T> {
         e.printStackTrace();
         BaseException baseException = mErrorHandler.handlerError(e);
         mBaseView.showError(baseException.getDisplayMsg());
-       /* super.onError(e);
-        if (e != null) {
-            BaseException baseException = mErrorHandler.handlerError(e);
+        super.onError(e);
+/*        if (e != null) {
+            BaseException Exception = mErrorHandler.handlerError(e);
             if (e.getMessage().equals("permission disgranted")) {
                 mBaseView.showError("授权失败");
             } else {
-                mBaseView.showError(baseException.getDisplayMsg());
+                mBaseView.showError(Exception.getDisplayMsg());
             }
         }*/
     }

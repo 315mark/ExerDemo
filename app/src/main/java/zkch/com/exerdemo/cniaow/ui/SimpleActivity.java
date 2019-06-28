@@ -52,7 +52,6 @@ import zkch.com.exerdemo.widget.BadgeActionProvider;
 
 public class SimpleActivity extends BaseActivity<SimplePresenter> implements MainContract.MainView {
 
-
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
@@ -180,7 +179,6 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
 
     /**
      * 初始化TavLayout  填充ToolBar
-     * ActionBarDrawerToggle TooolBar+ DrawerLayout 实现侧滑按钮
      */
     private void initTLabayout() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), initFragment());
@@ -197,6 +195,9 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
         return mFragments;
     }
 
+    /**
+     * * ActionBarDrawerToggle TooolBar+ DrawerLayout 实现侧滑按钮
+     */
     private void initToolbar() {
         mToolbar.inflateMenu(R.menu.menu_toolbar);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close);

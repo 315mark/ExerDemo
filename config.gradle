@@ -52,6 +52,5 @@ ext {
             "rxandroid"           : "io.reactivex.rxjava2:rxandroid:${android["rxbus"]}",
             "rxbus"               : "com.hwangjr.rxbus:rxbus:${android["rxbus"]}"
     ]
-
-
+    
 }

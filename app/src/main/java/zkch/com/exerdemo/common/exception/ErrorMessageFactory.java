@@ -5,38 +5,37 @@ import android.content.Context;
 import zkch.com.exerdemo.R;
 
 /**
- *  错误信息工厂类
+ * 错误信息工厂类
  */
-public class ErrorMessageFactory{
+public class ErrorMessageFactory {
 
-
-    public static String create(Context context,int code) {
+    public static String create(Context context, int code) {
         String errorMsg = null;
 
-        switch (code){
+        switch (code) {
 
             case BaseException.HTTP_ERROR:
-                errorMsg =context.getResources().getString(R.string.error_http);
+                errorMsg = context.getResources().getString(R.string.error_http);
                 break;
 
             case BaseException.SOCKET_TIMEOUT_ERROR:
-                errorMsg =  context.getResources().getString(R.string.error_socket_timeout);
+                errorMsg = context.getResources().getString(R.string.error_socket_timeout);
                 break;
 
             case BaseException.SOCKET_ERROR:
-                errorMsg =  context.getResources().getString(R.string.error_socket_unreachable);
+                errorMsg = context.getResources().getString(R.string.error_socket_unreachable);
                 break;
 
             case BaseException.ERROR_HTTP_400:
-                errorMsg =  context.getResources().getString(R.string.error_http_400);
+                errorMsg = context.getResources().getString(R.string.error_http_400);
                 break;
 
             case BaseException.ERROR_HTTP_404:
-                errorMsg =  context.getResources().getString(R.string.error_http_404);
+                errorMsg = context.getResources().getString(R.string.error_http_404);
                 break;
 
             case BaseException.ERROR_HTTP_500:
-                errorMsg =  context.getResources().getString(R.string.error_http_500);
+                errorMsg = context.getResources().getString(R.string.error_http_500);
                 break;
 
             case ApiException.ERROR_API_SYSTEM:
@@ -60,10 +59,9 @@ public class ErrorMessageFactory{
                 break;
 
             default:
-                errorMsg=context.getResources().getString(R.string.error_unkown);
+                errorMsg = context.getResources().getString(R.string.error_unkown);
                 break;
         }
-
         return errorMsg;
     }
 }

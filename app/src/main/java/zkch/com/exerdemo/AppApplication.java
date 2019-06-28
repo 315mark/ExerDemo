@@ -42,8 +42,10 @@ public class AppApplication extends MultiDexApplication {
 
         // AppComponent  配置完 先build 在调用下面这段 TODO
         //DaggerAppComponent.creat() 方法直接创建 前提注解组建不带参数
-        component = DaggerAppComponent.builder().appModule(new AppModule(this))
-                .httpModule(new HttpModule()).build();
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(getInstance()))
+                .httpModule(new HttpModule())
+                .build();
 
         AppContextUtils.init(this);//应用工具初始化
 

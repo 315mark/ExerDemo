@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 
 public class AndroidApkParser {
 
-
     public static Resources getResources(Context context, String apkPath) throws Exception {
         String PATH_AssetManager = "android.content.res.AssetManager";
         Class assetMagCls = Class.forName(PATH_AssetManager);
@@ -53,33 +52,26 @@ public class AndroidApkParser {
 
         AndroidApk apk = new AndroidApk();
 
-
         PackageManager pm = context.getPackageManager();
-
         PackageInfo info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
-
 
         apk.setPackageName(info.packageName);
         apk.setApkPath(path);
         apk.setAppVersionCode(info.versionCode + "");
         apk.setAppVersionName(info.versionName);
 
-
         Resources res = null;
 
         try {
+
             res = getResources(context, path);
-
             apk.setAppName(res.getString(info.applicationInfo.labelRes));
-
             Drawable icon = res.getDrawable(info.applicationInfo.icon);
             apk.setDrawable(icon);
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return apk;
     }

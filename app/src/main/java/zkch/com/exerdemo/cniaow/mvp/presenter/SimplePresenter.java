@@ -51,9 +51,11 @@ public class SimplePresenter extends BasePresenter<MainContract.IMainModel, Main
                         if (appInfos != null) {
                             ACache.get(mContext).put(Constant.APP_UPDATE_LIST, JsonUtil.toJson(appInfos));
                         }
+
                         mView.changeAppUpdateCount(appInfos == null ? 0 : appInfos.size());
                     }
                 });
+
     }
 
 

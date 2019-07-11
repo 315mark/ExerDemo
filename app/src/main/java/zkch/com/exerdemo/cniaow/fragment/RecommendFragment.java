@@ -16,9 +16,10 @@ import zkch.com.exerdemo.cniaow.mvp.component.DaggerRecommendComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
 import zkch.com.exerdemo.cniaow.mvp.module.RecommendModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.RecommendPresenter;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
- * 推荐页面  多类型item 可从View层下手
+ * 推荐页面  多类型item 可从View层下手 新增下载app功能
  */
 public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.RecyView {
 
@@ -27,6 +28,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     //Adapter 适配器
     private IndexMultAdapter adapter;
+
+    @Inject
+    RxDownload mRxDownload;
 
     @Inject
     ProgressDialog progressDialog;
@@ -52,22 +56,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         //rvRecommend.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
         //动画
         recyleView.setItemAnimator(new DefaultItemAnimator());
-        adapter = new IndexMultAdapter(getActivity());
+        adapter = new IndexMultAdapter(getActivity(), mRxDownload);
         adapter.setData(indexBean);
         recyleView.setAdapter(adapter);
-
-       /* recyleView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //存储视图
-                //  mApplication.setmView(view);
-                // Intent intent = new Intent(getActivity(), AppDetailActivity.class);
-                // adapter.getItem(position);
-                // intent.putExtra(APPINFO, appInfo);
-                //  startActivity(intent);
-            }
-        });
-         */
     }
 
     @Override
@@ -86,7 +77,6 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void onEmptyViewClick() {
-        mPresenter.requestDatas();
+        // mPresenter.requestDatas();
     }
-
 }

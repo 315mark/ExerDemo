@@ -9,7 +9,7 @@ import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 public class GamesFragment extends BaseAppInfoFragment {
 
     @Override
-    int type() {
+    public int type() {
         return AppInfoPresenter.GAME;
     }
 

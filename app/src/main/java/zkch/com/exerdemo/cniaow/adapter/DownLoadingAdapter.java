@@ -24,7 +24,6 @@ public class DownLoadingAdapter extends BaseQuickAdapter<DownloadRecord, BaseVie
         mDownloadController = new DownloadButtonConntroller(rxwnload);
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, DownloadRecord item) {
         AppInfo appInfo = mDownloadController.downloadRecor2AppInfo(item);
@@ -39,6 +38,5 @@ public class DownLoadingAdapter extends BaseQuickAdapter<DownloadRecord, BaseVie
             DownloadProgressButton btn = (DownloadProgressButton) viewBtn;
             mDownloadController.handClick(btn, item);
         }
-
     }
 }

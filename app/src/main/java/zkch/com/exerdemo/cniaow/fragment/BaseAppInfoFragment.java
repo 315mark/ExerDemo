@@ -36,7 +36,7 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     int page = 0;
 
-    abstract int type();
+    public abstract int type();
 
     public abstract AppInfoAdapter buildAdater();
 

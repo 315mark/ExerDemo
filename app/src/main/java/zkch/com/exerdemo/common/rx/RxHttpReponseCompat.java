@@ -1,7 +1,6 @@
 package zkch.com.exerdemo.common.rx;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,16 +17,19 @@ public class RxHttpReponseCompat {
     /* Observable.Transformer*/
     public static <T> ObservableTransformer<BaseBean<T>, T> compatResult() {
 
-        return upstream -> (ObservableSource<T>) upstream.flatMap((Function<BaseBean<T>, ObservableSource<?>>) tBaseBean -> {
+        return upstream -> (ObservableSource<T>) upstream.flatMap((Function<BaseBean<T>, ObservableSource<T>>) tBaseBean -> {
             if (tBaseBean.success()) {
-                return Observable.create((ObservableOnSubscribe<T>) emitter -> {
-                    emitter.onNext(tBaseBean.getData());
-                    emitter.onComplete();
+                return Observable.create(emitter -> {
+                    try {
+                        emitter.onNext(tBaseBean.getData());
+                        emitter.onComplete();
+                    } catch (Exception e) {
+                        emitter.onError(e);
+                    }
                 });
             } else {
                 return Observable.error(new ApiException(tBaseBean.getStatus(), tBaseBean.getMessage()));
             }
-
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
     }
 }

@@ -3,6 +3,7 @@ package zkch.com.exerdemo.cniaow.fragment;
 import android.annotation.SuppressLint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -66,6 +67,7 @@ public class AppDetailFragment extends ProgressFragment<AppDetailPresenter> impl
     @Override
     protected void init() {
         mInflater = LayoutInflater.from(getActivity());
+        Log.i("执行到此", "");
         mPresenter.getAppDetail(mAppId);
     }
 

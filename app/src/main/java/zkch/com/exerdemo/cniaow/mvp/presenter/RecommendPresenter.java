@@ -1,5 +1,7 @@
 package zkch.com.exerdemo.cniaow.mvp.presenter;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
@@ -21,12 +23,14 @@ public class RecommendPresenter extends BasePresenter<AppInfoModel, AppInfoContr
 
     //
     public void requestDatas() {
-        mModel.getIndex().compose(RxHttpReponseCompat.compatResult()).subscribe(new ProgressObserver<IndexBean>(mContext, mView) {
-            @Override
-            public void onNext(IndexBean indexBean) {
-                mView.showResult(indexBean);
-            }
-        });
+        mModel.getIndex().compose(RxHttpReponseCompat.compatResult())
+                .subscribe(new ProgressObserver<IndexBean>(mContext, mView) {
+                    @Override
+                    public void onNext(IndexBean indexBean) {
+                        Log.i(getClass().getName(), "onNext: " + indexBean);
+                        mView.showResult(indexBean);
+                    }
+                });
     }
 
 

@@ -134,6 +134,5 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo, BaseViewHolder> {
             this.isUpdateStatus = b;
             return this;
         }
-
     }
 }

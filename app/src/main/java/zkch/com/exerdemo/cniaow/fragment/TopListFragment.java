@@ -9,7 +9,7 @@ import zkch.com.exerdemo.cniaow.mvp.presenter.AppInfoPresenter;
 public class TopListFragment extends BaseAppInfoFragment {
 
     @Override
-    int type() {
+    public int type() {
         return AppInfoPresenter.TOP_LIST;
     }
 
@@ -26,6 +26,4 @@ public class TopListFragment extends BaseAppInfoFragment {
                 .appInfoModule(new AppInfoModule(this))
                 .build().injectTopListFragment(this);
     }
-
-
 }

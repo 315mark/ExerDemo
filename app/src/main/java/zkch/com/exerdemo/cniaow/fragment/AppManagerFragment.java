@@ -9,7 +9,9 @@ import butterknife.BindView;
 import zkch.com.exerdemo.R;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.mvp.component.AppComponent;
+import zkch.com.exerdemo.cniaow.mvp.component.DaggerAppManagerComponent;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppManagerContract;
+import zkch.com.exerdemo.cniaow.mvp.module.AppManagerModule;
 import zkch.com.exerdemo.cniaow.mvp.presenter.AppManagerPresenter;
 import zkch.com.exerdemo.common.apkparest.AndroidApk;
 import zkch.com.exerdemo.widget.DividerItemDecoration;
@@ -42,7 +44,9 @@ public abstract class AppManagerFragment extends ProgressFragment<AppManagerPres
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
         //TODO
-
+        DaggerAppManagerComponent.builder().appComponent(appComponent)
+                .appManagerModule(new AppManagerModule(this))
+                .build().inject(this);
     }
 
     @Override

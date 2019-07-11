@@ -17,7 +17,6 @@ public class DownloadingFragment extends AppManagerFragment {
         mPresenter.getDownloadingApps();
     }
 
-
     @Override
     protected RecyclerView.Adapter setAdapter() {
         mAdapter = new DownLoadingAdapter(mPresenter.getRxDownload());

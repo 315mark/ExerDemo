@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -83,7 +84,6 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
     private void initView() {
 
         View view = mApp.getmView();
-
         int[] location = new int[2];
         view.getLocationOnScreen(location);
         int left = location[0];
@@ -104,7 +104,10 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
             viewTemp.setBackground(new BitmapDrawable(getResources(), bitmapCache));
         }
 
-        open();
+        // open();
+        viewTemp.setVisibility(View.GONE);
+        viewCoordinator.setVisibility(View.VISIBLE);
+        initFragment();
 
     }
 
@@ -132,6 +135,7 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
     }
 
     private void initFragment() {
+        Log.i("appinfo%s", mAppInfo.getId() + "");
         AppDetailFragment fragment = new AppDetailFragment(mAppInfo.getId());
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

@@ -7,20 +7,17 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -53,9 +50,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Michael Yang（www.yangfuhai.com） update at 2013.08.07
- *
- *  ACache  轻量级的缓存框架 最终以java class的形式缓存  类似SP
- *  部分机型无法创建文件夹 需要进行修改
+ * <p>
+ * ACache  轻量级的缓存框架 最终以java class的形式缓存  类似SP
+ * 部分机型无法创建文件夹 需要进行修改
  */
 public class ACache {
     public static final int TIME_HOUR = 60 * 60;
@@ -148,10 +145,11 @@ public class ACache {
 
     /**
      * 读取 String数据
+     *
      * @param key
      * @return String 数据
      */
-     // TODO 此处进行优化  BufferedInputStream
+    // TODO 此处进行优化  BufferedInputStream
     public String getAsString(String key) {
         File file = mCache.get(key);
         if (!file.exists())
@@ -166,11 +164,11 @@ public class ACache {
             //自己定义一个缓冲区
             byte[] buffer = new byte[1024 * 8];
             int flag;
-            Log.e("flag--","ACache--getAsString--171"+"");
+            //     Log.e("flag--","ACache--getAsString--171"+"");
             while ((flag = bis.read(buffer)) != -1) {
                 content.append(new String(buffer, 0, flag));
             }
-            Log.e("flag--","ACache--getAsString--175"+"");
+            //    Log.e("flag--","ACache--getAsString--175"+"");
             if (!Utils.isDue(content.toString())) {
                 return Utils.clearDateInfo(content.toString());
             } else {
@@ -180,13 +178,13 @@ public class ACache {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (removeFile){
+            if (removeFile) {
                 remove(key);
             }
 
             try {
 
-                if (bis != null){
+                if (bis != null) {
                     bis.close();
                 }
             } catch (IOException e) {

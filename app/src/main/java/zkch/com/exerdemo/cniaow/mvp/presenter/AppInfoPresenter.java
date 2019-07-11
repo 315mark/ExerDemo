@@ -1,10 +1,13 @@
 package zkch.com.exerdemo.cniaow.mvp.presenter;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import zkch.com.exerdemo.cniaow.bean.AppInfo;
+import zkch.com.exerdemo.cniaow.bean.BaseBean;
 import zkch.com.exerdemo.cniaow.bean.PageBean;
 import zkch.com.exerdemo.cniaow.model.AppInfoModel;
 import zkch.com.exerdemo.cniaow.mvp.contract.AppInfoContract;
@@ -32,8 +35,12 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
 
     public void requestData(int type, int page) {
         request(type, page, 0, 0);
+        Log.i(getClass().getName(), "requestData: " + type + "  页面 " + page);
     }
 
+    /**
+     * 获取制定类别下的数据
+     */
     public void requestCategoryApps(int categoryId, int page, int flagType) {
         request(CATEGORY, page, categoryId, flagType);
     }
@@ -63,17 +70,16 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
             };
         }
 
-        getObervable(page, type, categoryId, flagType)
-                .compose(RxHttpReponseCompat.<PageBean<AppInfo>>compatResult())
+        getObervable(type, page, categoryId, flagType)
+                .compose(RxHttpReponseCompat.compatResult())
                 .subscribe(observer);
     }
 
 
-    private Observable getObervable(int type, int page, int categoryId, int flagType) {
+    private Observable<BaseBean<PageBean<AppInfo>>> getObervable(int type, int page, int categoryId, int flagType) {
         switch (type) {
             case TOP_LIST:
                 return mModel.toList(page);
-
             case GAME:
                 return mModel.getGames(page);
 

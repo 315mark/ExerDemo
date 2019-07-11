@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
+import zkch.com.exerdemo.AppApplication;
 import zkch.com.exerdemo.R;
+import zkch.com.exerdemo.cniaow.bean.AppInfo;
 import zkch.com.exerdemo.cniaow.bean.Banner;
 import zkch.com.exerdemo.cniaow.bean.IndexBean;
+import zkch.com.exerdemo.cniaow.ui.AppDetailActivity;
 import zkch.com.exerdemo.cniaow.ui.SubjectActivity;
 import zkch.com.exerdemo.widget.BannerLayout;
+import zlc.season.rxdownload2.RxDownload;
+
+import static zkch.com.exerdemo.common.constant.Constant.APPINFO;
 
 /**
  * 多类型RecyleView 复用
@@ -43,10 +49,13 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private IndexBean mIndexBean;
     private Context mContext;
+    private List<AppInfo> appInfos;
+    private RxDownload rxDownload;
 
-    public IndexMultAdapter(Context mContext) {
+    public IndexMultAdapter(Context mContext, RxDownload download) {
         this.mContext = mContext;
         this.mLayoutInflater = LayoutInflater.from(mContext);
+        this.rxDownload = download;
     }
 
     /**
@@ -137,26 +146,31 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         .showBrief(true)
                         .showPosition(false)
                         .showCategoryName(false)
+                        .rxDownload(rxDownload)
                         .build();
                 if (appViewHolder.type == TYPE_APPS) {
                     appViewHolder.text.setText("热门应用");
                     appViewHolder.text.setTextColor(mContext.getResources().getColor(R.color.md_pink_A700));
-                    appInfoAdapter.addData(mIndexBean.getRecommendApps());
+                    appInfos = mIndexBean.getRecommendApps();
                 } else {
                     appViewHolder.text.setText("热门游戏");
                     appViewHolder.text.setTextColor(mContext.getResources().getColor(R.color.md_red_A700));
-                    appInfoAdapter.addData(mIndexBean.getRecommendGames());
+                    appInfos = mIndexBean.getRecommendGames();
                 }
+                appInfoAdapter.addData(appInfos);
                 // TODO: set inner adapter
                 appViewHolder.recyleView.setAdapter(appInfoAdapter);
-                appViewHolder.recyleView.addOnItemTouchListener(new OnItemChildClickListener() {
+                appViewHolder.recyleView.addOnItemTouchListener(new OnItemClickListener() {
                     @Override
-                    public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+                    public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        AppApplication.getInstance().setmView(view);
+                        Intent intent = new Intent(mContext, AppDetailActivity.class);
+                        AppInfo appInfo = (AppInfo) adapter.getData().get(position);
+                        intent.putExtra(APPINFO, appInfo);
+                        mContext.startActivity(intent);
                     }
                 });
                 break;
-
             default:
                 break;
         }
@@ -226,6 +240,7 @@ public class IndexMultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
             DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
             recyleView.addItemDecoration(itemDecoration);
+
         }
     }
 

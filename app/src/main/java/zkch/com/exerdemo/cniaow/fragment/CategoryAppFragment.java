@@ -24,7 +24,7 @@ public class CategoryAppFragment extends BaseAppInfoFragment {
     }
 
     @Override
-    int type() {
+    public int type() {
         return 0;
     }
 

@@ -86,7 +86,7 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
                         initDrawerLayout();
                         initTLabayout();
                         initToolbar();
-                        initUser();
+//                        initUser();
                     } else {
                         ToastUtils.showShort("请设置权限");
                     }

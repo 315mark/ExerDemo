@@ -108,7 +108,6 @@ public class AppDetailActivity extends BaseActivity<AppDetailPresenter> {
         viewTemp.setVisibility(View.GONE);
         viewCoordinator.setVisibility(View.VISIBLE);
         initFragment();
-
     }
 
     //开启动画

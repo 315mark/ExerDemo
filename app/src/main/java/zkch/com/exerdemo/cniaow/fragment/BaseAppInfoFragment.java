@@ -48,6 +48,11 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
     @Override
     protected void init() {
         initRecyView();
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
         mPresenter.requestData(type(), page);
     }
 

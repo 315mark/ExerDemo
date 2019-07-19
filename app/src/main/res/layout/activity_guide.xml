@@ -33,5 +33,4 @@
         app:ci_height="15dp"
         app:ci_width="15dp" />
 
-
 </RelativeLayout>

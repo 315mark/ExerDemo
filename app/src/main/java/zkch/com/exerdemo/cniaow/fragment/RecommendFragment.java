@@ -36,8 +36,13 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     ProgressDialog progressDialog;
 
     @Override
-    protected void init() {
+    protected void lazyLoad() {
         mPresenter.requestDatas();
+    }
+
+    @Override
+    protected void init() {
+
     }
 
     @Override

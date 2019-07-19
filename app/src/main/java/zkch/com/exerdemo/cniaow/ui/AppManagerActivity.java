@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
@@ -31,7 +32,7 @@ public class AppManagerActivity extends BaseActivity {
     TabLayout Tabs;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-
+    int intExtra = 0;
 
     @Override
     protected int getLayoutResID() {
@@ -41,7 +42,9 @@ public class AppManagerActivity extends BaseActivity {
     @Override
     protected void init() {
         initToolbar();
-
+        //获取Bundle数据
+        intExtra = getIntent().getIntExtra("fragment", 0);
+        Log.i(getClass().getName(), "init: " + intExtra);
         initTabLayout();
     }
 
@@ -55,10 +58,12 @@ public class AppManagerActivity extends BaseActivity {
     }
 
     private void initTabLayout() {
+
         PagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), initFragment());
-        viewPager.setOffscreenPageLimit(adapter.getCount());
+        viewPager.setOffscreenPageLimit(0);
         viewPager.setAdapter(adapter);
         Tabs.setupWithViewPager(viewPager);
+        viewPager.setCurrentItem(intExtra);
     }
 
     private List<FragmentInfo> initFragment() {

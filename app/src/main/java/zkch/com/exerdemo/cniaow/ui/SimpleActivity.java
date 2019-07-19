@@ -3,6 +3,7 @@ package zkch.com.exerdemo.cniaow.ui;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -150,7 +151,7 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
         navigaviewLeft.getMenu().findItem(R.id.item_remove).setIcon(new IconicsDrawable(this, Ionicons.Icon.ion_ios_trash_outline));
         navigaviewLeft.getMenu().findItem(R.id.item_setting).setIcon(new IconicsDrawable(this, Ionicons.Icon.ion_ios_gear_outline));
         navigaviewLeft.getMenu().findItem(R.id.item_login).setIcon(new IconicsDrawable(this, AliFont.Icon.cniao_shutdown));
-
+        Bundle bundle = new Bundle();
         //侧滑菜单的点击操作
         navigaviewLeft.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -161,15 +162,16 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
 
                     break;
                 case R.id.item_download:
-
+                    bundle.putInt("fragment", 0);
+                    launch(bundle, AppManagerActivity.class);
                     break;
                 case R.id.item_remove:
-
+                    bundle.putInt("fragment", 3);
+                    launch(bundle, AppManagerActivity.class);
                     break;
                 case R.id.item_setting:
-
+                    launch(SettingActivity.class);
                     break;
-
                 default:
                     break;
             }
@@ -184,6 +186,7 @@ public class SimpleActivity extends BaseActivity<SimplePresenter> implements Mai
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), initFragment());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(0); //设置懒加载
     }
 
     private List<FragmentInfo> initFragment() {

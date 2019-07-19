@@ -26,6 +26,7 @@ import zkch.com.exerdemo.cniaow.ui.BaseView;
 
 /**
  * 打造带进度的Fragment 基类
+ * 添加懒加载模式
  *
  * @param <T>
  */
@@ -39,6 +40,15 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     private Unbinder unbinder;
     protected AppApplication mApplication;
     CompositeDisposable mCompositeDisposable;
+
+    /**
+     * 是否初始化布局
+     */
+    protected boolean isViewInitiated;
+    /**
+     * 当前界面是否可见
+     */
+    protected boolean isVisibleToUser;
 
     @Inject
     public T mPresenter;
@@ -65,6 +75,8 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         //添加布局
         setRealContentView();
         init();
+        isViewInitiated = true;
+        isCanLoadData();
     }
 
     /**
@@ -75,6 +87,31 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         unbinder = ButterKnife.bind(this, RealView);
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // 是否对用户可见
+        this.isVisibleToUser = isVisibleToUser;
+        if (isVisibleToUser) {
+            isCanLoadData();
+        }
+    }
+
+    /*
+     * 执行数据加载： 条件是view初始化完成并且对用户可见
+     */
+    private void isCanLoadData() {
+        if (isViewInitiated && isVisibleToUser) {
+            lazyLoad();
+            // 加载过数据后，将isViewInitiated和isVisibleToUser设置成false，防止重复加载数据
+            isViewInitiated = false;
+            isVisibleToUser = false;
+        }
+    }
+
+    protected void lazyLoad() {
+
+    }
 
     public void showProgressView() {
         showView(R.id.view_progress);
@@ -96,7 +133,6 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         mTextError.setText(disMsg);
     }
 
-
     /**
      * 网络请求 多布局选择操作
      *
@@ -112,7 +148,6 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
             }
         }
     }
-
 
     /**
      * 添加订阅
